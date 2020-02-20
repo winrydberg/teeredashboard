@@ -35,15 +35,20 @@
                             <td class="text-truncate">{{$a->email}}</td>
                             {{-- <td class="text-truncate">{{$a->}}</td> --}}
                             <td class="text-truncate">{{$a->phoneno}}</td>
-                            @if($a->role_id ==1)
+                            <td>{{$a->roles->pluck('name')[0]}}</td>
+                            {{-- @if($a->role_id ==1)
                             <td class="text-truncate">SUPER ADMIN</td>
                             @elseif($a->role_id ==2)
                             <td class="text-truncate">MONITOR</td>
                             @else
                             <td class="text-truncate">N/A</td>
-                            @endif
+                            @endif --}}
                             <td class="text-truncate">
-                                <a href="#" class="btn btn-sm btn-danger">DELETE</a>
+                                @if(Auth::guard('admin')->user()->district_id == $a->district_id)
+                                 <button href="#" class="btn btn-sm btn-danger">
+                                     <i class="fa fa-remove"></i>
+                                     DELETE</button>
+                                 @endif
                             </td>
                             </tr>
                             @endforeach

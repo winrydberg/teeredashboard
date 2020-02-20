@@ -1,9 +1,8 @@
 @extends('admin.layout.base')
 @section('content')
 
- 
 <div class="row">
-		<div class="col-xl-12 col-lg-12">
+    <div class="col-xl-12 col-lg-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">APPROVED APPLICANTS</h4>
@@ -30,18 +29,35 @@
                         <tbody>
                             @foreach($applicants as $a)
                             <tr>
-                            <td class="text-truncate">TEERE{{$a->id}}</td>
-                            <td class="text-truncate">{{$a->firstname." ". $a->lastname}}</td>
-                            <td class="text-truncate">{{$a->region}}</td>
-                            <td class="text-truncate">{{$a->district}}</td>
-                            <td class="text-truncate">{{$a->phoneno}}</td>
-                            <td class="text-truncate">
-                                <a href="#" class="btn btn-success">View Details</a>
-                            </td>
+                                <td class="text-truncate">TEERE{{$a->id}}</td>
+                                <td class="text-truncate">{{$a->firstname." ". $a->lastname}}</td>
+                                <td class="text-truncate">{{$a->region}}</td>
+                                <td class="text-truncate">{{$a->district}}</td>
+                                <td class="text-truncate">{{$a->phoneno}}</td>
+                                <td class="text-truncate">
+                                    <a href="{{url('/applicant-details/teere00'.$a->id)}}" class="btn btn-success">VIEW
+                                        DETAILS</a>
+                                    @role('Finance Officer')
+                                    <a href="{{url('approved/teere00'.$a->id)}}" class="btn btn-md btn-primary">APPROVED
+                                        AMOUNT</a>
+                                    @endrole
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <hr>
+
+
+                <div class="col-md-12">
+                <a href="{{url('approved-excel')}}" class="btn btn-success">
+                    <i class="fa fa-save"></i>
+                    EXPORT TO EXCEL</a>
+                </div>
+
+                <div class="row" style="margin-bottom: 30px;">
+
                 </div>
             </div>
         </div>

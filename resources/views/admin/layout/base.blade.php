@@ -53,7 +53,7 @@ height: auto;
       </div>
     </div>
     <footer class="footer footer-static footer-light navbar-border">
-      <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2 content"><span class="float-md-left d-block d-md-inline-block">Copyright  &copy; {{date('Y')}}. All rights reserved. Moohey Systems</span></p>
+      <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2 content"><span class="float-md-left d-block d-md-inline-block">Copyright  &copy; {{date('Y')}}. All rights reserved. Teere Systems. Designed by <a href="www.digicodesystems.com">Digicode Systems</a></span></p>
     </footer>
     @yield('scripts-above')
     <div id="roxyCustomPanel2" style="display: none;">
@@ -61,7 +61,7 @@ height: auto;
           </iframe>
     </div>
     {{-- send message modal --}}
-<div class="modal fade text-left" id="sendmessagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+{{-- <div class="modal fade text-left" id="sendmessagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
     <div class="modal-header">
@@ -103,14 +103,14 @@ height: auto;
     </form>
 </div>
 </div>
-</div>
+</div> --}}
 
 
-<button type="button" data-toggle="modal" id="onshowbtn" data-target="#showthisbefore">
+{{-- <button type="button" data-toggle="modal" id="onshowbtn" data-target="#showthisbefore">
                   
-                  </button>
+                  </button> --}}
 {{-- try this and see --}}
-<div class="modal fade text-left" id="showthisbefore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+{{-- <div class="modal fade text-left" id="showthisbefore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -124,7 +124,7 @@ height: auto;
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 {{-- end --}}
 
      <script>

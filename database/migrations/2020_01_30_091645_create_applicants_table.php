@@ -41,15 +41,20 @@ class CreateApplicantsTable extends Migration
             $table->integer('dependants')->nullable()->nullable();
 
             $table->String('objective')->nullable()->nullable();
-
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->text('intentoffund')->nullable();
             $table->integer('total_amount')->nullable();
+            $table->integer('approvedAmt')->default(0);
             $table->text('groupapplication')->nullable();
 
             $table->text('breakdown')->nullable();
             $table->String('info_approval')->nullable();
 
-            $table->boolean('approved')->nullable();
+            $table->boolean('approved')->nullable()->default(false);
+            $table->integer('approved1')->nullable()->default(0);
+            $table->integer('approved2')->nullable()->default(0);
+            $table->integer('approved3')->nullable()->default(0);
 
             $table->String('region')->nullable();
             $table->String('district')->nullable();

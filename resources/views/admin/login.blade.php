@@ -69,7 +69,7 @@ height: auto;
         </div>
         <div class="content-body" background="{{asset('assets/images/backgrounds/bg-12.jpg')}}"><!-- Stats -->
             {{-- start here --}}
-        <section class="flexbox-container" style="background-image: url('{{asset('assets/images/backgrounds/mac.jpg')}}')">
+        <section class="flexbox-container" style="background-image: url('{{asset('assets/images/bg.jpg')}}')">
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="col-md-4 col-10 box-shadow-2 p-0">
                             <div class="card border-grey border-lighten-3 m-0">
@@ -86,7 +86,7 @@ height: auto;
                                       @if(Session::has('error'))
                                     <p class="alert alert-danger">{{Session::get('error')}}</p>
                                       @endif
-                                    <form class="form-horizontal form-simple" method="POST" action="{{url('/regulator/login')}}">
+                                    <form class="form-horizontal form-simple" method="POST" action="{{url('/login')}}">
                                              {{csrf_field()}}   
                                             <fieldset class="form-group position-relative has-icon-left mb-0">
                                                 <input type="text" name="email" class="form-control form-control-lg input-lg" id="user-name" placeholder="Your Email" required="" aria-invalid="false">
@@ -119,7 +119,7 @@ height: auto;
       </div>
     </div>
     <footer class="footer footer-static footer-light navbar-border">
-      <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2 content"><span class="text-center d-block d-md-inline-block">Copyright  &copy; {{date('Y')}}. All rights reserved. Tracepro</span></p>
+      <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2 content"><span class="text-center d-block d-md-inline-block">Copyright  &copy; {{date('Y')}}. All rights reserved. Teere Administration. Designed By <a target="_blank" href="https://digicodesystems.com">Digicode Systems</a></span></p>
     </footer>
     @yield('scripts-above')
     

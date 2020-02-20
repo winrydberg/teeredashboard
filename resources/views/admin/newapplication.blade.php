@@ -6,7 +6,7 @@
     <div class="col-xl-12 col-lg-12 col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">SEARCH BIN</h4>
+                <h4 class="card-title">SEARCH APPLICANT</h4>
             </div>
             <div class="card-content">
                 <div class="card-body">
@@ -14,7 +14,7 @@
                     <form method="GET">
                         <fieldset>
                             <div class="input-group">
-                                <input type="text" name="searchbin" class="form-control" placeholder="Enter BIN">
+                                <input type="text" name="searcnname" class="form-control" placeholder="Enter Applicant">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fa fa-search"></i> SEARCH
@@ -36,7 +36,7 @@
     <div class="col-xl-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">SEARCH RESULTS</h4>
+                <h4 class="card-title">NEW APPLICATIONS</h4>
                 <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                 <div class="heading-elements">
                     <ul class="list-inline mb-0">
@@ -67,13 +67,27 @@
                             <td class="text-truncate">{{$a->district}}</td>
                             <td class="text-truncate">{{$a->phoneno}}</td>
                                 <td class="text-truncate">
-                                    <a href="#" class="btn btn-md btn-danger">View Details</a>
+                                <a href="{{url('/applicant-details/teere00'.$a->id)}}" class="btn btn-md btn-danger">View Details</a>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+
+                <hr>
+
+               
+                    <div class="col-md-12">
+                    <a href="{{url('unapproved-excel')}}" class="btn btn-success">
+                        <i class="fa fa-save"></i>
+                        EXPORT TO EXCEL</a>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 30px;">
+
+                    </div>
+                
             </div>
         </div>
     </div>

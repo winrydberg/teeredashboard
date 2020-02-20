@@ -84,12 +84,14 @@ class ApplicationController extends Controller
         $applicant->occupation = $r->occupation;
         $applicant->yearsinobusines = $r->yearsinobusines;
         $applicant->dependants = $r->dependants;
-        $applicant->objective = $r->objective;
+        $applicant->objective = json_encode($r->objective);
         $applicant->intentoffund = $r->fundintents;
         $applicant->total_amount = $r->totalamount;
         $applicant->groupapplication = $r->groupapplication;
         $applicant->breakdown = $r->budgets;
         $applicant->info_approval = $r->info_approval;
+        $applicant->region = $r->region;
+        $applicant->district = $r->district;
         $applicant->approved = false;
 
         if($applicant->save()){

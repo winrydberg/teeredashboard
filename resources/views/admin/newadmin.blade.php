@@ -2,8 +2,9 @@
 
 
 @section('content')
-<div class="col-md-12">
-    <div class="card" style="height: 980px;">
+<div class="row">
+    <div class="col-xl-12 col-lg-12">
+    <div class="card" >
         <div class="card-header">
             <h4 class="card-title" id="basic-layout-form">NEW ADMINISTRATOR</h4>
             <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
@@ -53,11 +54,17 @@
 
                             <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="adminlevel">ADMIN LEVEL</label>
+                                        <label for="adminlevel">STAFF TYPE</label>
                                         <select id="adminlevel" required name="adminlevel" class="form-control">
                                             <option value="" selected="" disabled="">Select Admin Level</option>
-                                            <option value="1">SUPER ADMIN</option>
-                                            <option value="2">MONITOR</option>
+                                           @foreach ($roles as $item)
+                                            <option value="{{$item->id}}">{{$item->name}}</option>
+                                           @endforeach
+                                            {{-- <option value="1">SUPER ADMIN</option>
+                                            <option value="2">MONITORING OFFICER</option>
+                                            <option value="3">FINANCE OFFICER</option>
+                                            <option value="5">SECRETARY</option>
+                                            <option value="6">APPROVAL OFFICER</option> --}}
                                         </select>
                                     </div>
                                 </div>
@@ -71,11 +78,18 @@
                                     </div>
                                 </div>
 
-                                {{-- <div class="col-md-6" >
-                                        <div class="form-group">
-                                            <input type="hidden"  id="passwordmain" class="form-control" placeholder="Password" name="passwordmain">
-                                        </div>
-                                    </div> --}}
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="adminlevel">DISTRICT</label>
+                                        <select id="adminlevel" required name="district" class="form-control">
+                                            <option value="" selected="" disabled="">Select District</option>
+                                            @foreach($districts as $d)
+                                                <option value="{{$d->id}}">{{$d->name}}</option>
+                                            @endforeach
+                                          
+                                        </select>
+                                    </div>
+                                </div>
                         </div>
 
                     </div>
@@ -93,6 +107,7 @@
         </div>
     </div>
 </div>
+</div>
 @stop
 
 
@@ -100,6 +115,7 @@
 
 
 @section('scripts-below')
+
     <script>
           $(document).ready(function(){ 
                $.ajax({

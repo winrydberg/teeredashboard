@@ -63,7 +63,7 @@
                                 {{-- <div class="progress mt-1 mb-0" style="height: 7px;">
                                     <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div> --}}
-                            <a href="{{url('/new-applications')}}"  class="btn btn-success btn-block btn-md"> <i class="ft-plus-circle"></i>NEW APPLICATION</a>
+                            <a href="{{url('/new-applicant')}}"  class="btn btn-success btn-block btn-md"> <i class="ft-plus-circle"></i>NEW APPLICATION</a>
                             </div>
                         </div>
                     </div>

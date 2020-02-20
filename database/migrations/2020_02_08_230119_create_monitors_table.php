@@ -23,8 +23,6 @@ class CreateMonitorsTable extends Migration
             $table->foreign('applicant_id')->references('id')->on('applicants');
             $table->text('activity_type');
             $table->text('activity_undertaken');
-
-
             $table->integer('admin1')->nullable();
             $table->integer('admin2')->nullable();
             $table->integer('admin3')->nullable();
