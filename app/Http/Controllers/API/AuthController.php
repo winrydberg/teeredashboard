@@ -26,7 +26,7 @@ class AuthController extends Controller
         if($validator->fails()){
             return response()->json([
                 'success' => false,
-                'message' =>'Password or Email has already been used',
+                'message' =>'Phone Number or Email has already been used',
                 'data' => null,
             ], 200);
         }
@@ -49,6 +49,8 @@ class AuthController extends Controller
     {
         $input = $request->only('phoneno', 'password');
         $jwt_token = null;
+
+        
  
         if (!$jwt_token = JWTAuth::attempt($input)) {
             return response()->json([

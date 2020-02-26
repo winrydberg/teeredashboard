@@ -10,12 +10,12 @@
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">  --}}
     <style>
         body {
-            position: fixed;
+            /* position: fixed; */
             width: 100%;
             height: 100%;
-            z-index: 99999;
-            background: url('{{asset('assets/images/logo.jpeg')}}') center center no-repeat;
-            pointer-events: none;
+            /* z-index: 99999; */
+            background: url('{{asset('assets/images/approved.jpg')}}') center center no-repeat;
+            /* pointer-events: none; */
         }
         .mainContainer {
             display: flex;
@@ -45,7 +45,7 @@
             /* background-color:yellow; */
         }
     </style>
-    <title>Hello, world!</title>
+    <title>Applicant PDF</title>
 </head>
 
 <body>
@@ -57,8 +57,12 @@
     </div> --}}
     {{-- <div class="row"> --}}
 
-
-    <div class="col-md-12">
+     <div class="imagehead">
+            <img  style="height: 100px; width: 110px;" src="{{asset('assets/images/ghana.png')}}"/>
+     </div>
+     <br/>
+    <div class="heading">
+       
         <h4 align="center">BOLGATANGA MUNICIPAL ASSEMBLY</h4>
         <h4 align="center">DISTRICT ASSSEMBLY COMMON FUND FOR PERSONS LIVING WITH DISABILITY</h4>
     </div>
@@ -101,13 +105,13 @@
     <div class="contain">
 
 
-        <div class="info1">
-
-            <p><strong>First Name: </strong><span style="text-transform:uppercase">{{$applicant->firstname}}</span></p>
-            <p><strong>Last Name: </strong><span style="text-transform:uppercase">{{$applicant->lastname}}</span></p>
-            <p><strong>Gender: </strong><span style="text-transform:uppercase">{{$applicant->gender}}</span></p>
-            <p><strong>Date Of Birth: </strong><span
-                    style="text-transform:uppercase">{{date('d-m-Y', strtotime($applicant->dob))}}</span></p>
+        <div class="info1"
+            <?php
+                $disabilities = json_decode($applicant->disabilitytype);
+                ?>
+            @foreach($disabilities as $key=>$d)
+            <p><strong>{{$key}}: </strong><span style="text-transform:uppercase">{{$d}}</span></p>
+            @endforeach
 
         </div>
         <br />
@@ -149,6 +153,64 @@
         <br />
         {{-- <hr> --}}
     </div>
+
+    <br />
+    <legend style="text-transform:uppercase">SOCIAL INSTITUTION</legend>
+    <hr />
+    <div class="contain">
+
+
+        <div class="info1">
+            <p><strong>Applicant Occupation: </strong><span style="text-transform:uppercase">{{$applicant->occupation}}</span></p>
+            <p><strong>Years in Business: </strong><span style="text-transform:uppercase">{{$applicant->yearsinbsuiness}}</span></p>
+            <p><strong>Number Of Dependants: </strong><span style="text-transform:uppercase">{{$applicant->dependants}}</span></p>
+        </div>
+        <br />
+        {{-- <hr> --}}
+    </div>
+
+    
+    <br />
+    <legend style="text-transform:uppercase">AREAS APPLICANT INTENT TO USE FUND</legend>
+    <hr />
+    <div class="contain">
+
+
+        <div class="info1"
+            <?php
+                $objectives = json_decode($applicant->objective);
+                ?>
+            @foreach($objectives as $key=>$ob)
+            <p><strong>#-{{$key+1}}: </strong><span style="text-transform:uppercase">{{$ob}}</span></p>
+            @endforeach
+
+        </div>
+        <br />
+        {{-- <hr> --}}
+    </div>
+
+    <br />
+    <legend style="text-transform:uppercase">TOTAL AMOUNT</legend>
+    <hr />
+    <div class="contain">
+
+
+        <div class="info1">
+            <p><strong>Total Amount Requested: </strong><span style="text-transform:uppercase">{{$applicant->total_amount}}</span></p>
+            
+        </div>
+        <br />
+        {{-- <hr> --}}
+    </div>
+
+    <br />
+    <legend>APPROVAL OFFICERS</legend>
+    <hr />
+    <div class="testcon" >
+            <p><strong>Official #1: </strong><span style="text-transform:uppercase">{{$admins[0] != null?$admins[0]->name:'NOT APPROVED'}}</span></p>
+            <p><strong>Official #2: </strong><span style="text-transform:uppercase">{{$admins[1] != null?$admins[1]->name:'NOT APPROVED'}}</span></p>
+            <p><strong>Official #3: </strong><span style="text-transform:uppercase">{{$admins[2] != null?$admins[2]->name:'NOT APPROVED'}}</span></p>
+        </div>
 
 
     <!-- Optional JavaScript -->

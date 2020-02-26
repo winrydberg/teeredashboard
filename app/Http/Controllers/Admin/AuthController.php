@@ -31,6 +31,10 @@ class AuthController extends Controller
         }
     }
 
+    public function forgotPassword(){
+        return view('admin.resetpassword');
+    }
+
 
 
     public function logout()

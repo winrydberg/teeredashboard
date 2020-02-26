@@ -105,10 +105,10 @@ height: auto;
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    {{-- <div class="">
-                                        <p class="float-sm-left text-center m-0" ><a href="#" class="card-link"><span style="color:black">Recover password</span></a></p>
+                                    <div class="">
+                                    <p class="float-sm-left text-center m-0" ><a href="{{url('/forgot-password')}}" class="card-link"><span >Forgot password</span></a></p>
                                        
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

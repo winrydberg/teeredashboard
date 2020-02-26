@@ -52,6 +52,8 @@ class CreateApplicantsTable extends Migration
             $table->String('info_approval')->nullable();
 
             $table->boolean('approved')->nullable()->default(false);
+            $table->boolean('disapproved')->nullable()->default(false);
+            $table->boolean('fundreleased')->nullable()->default(false);
             $table->integer('approved1')->nullable()->default(0);
             $table->integer('approved2')->nullable()->default(0);
             $table->integer('approved3')->nullable()->default(0);

@@ -19,11 +19,15 @@ Route::get('/', function () {
 Route::get('/login', 'Admin\AuthController@login')->name('login');
 Route::post('/login', 'Admin\AuthController@authenticate');
 Route::get('/logout', 'Admin\AuthController@logout');
+Route::get('/forgot-password', 'Admin\AuthController@forgotPassword');
 
 Route::get('/new-admin','Admin\AdminController@newAdmin');
 Route::post('/new-admin','Admin\AdminController@saveAdmin');
 Route::get('/get-passsword', 'Admin\AdminController@getPassword');
-Route::get('/download-pdf/{id}', 'Admin\AdminController@downloadApplicantPDF');
+Route::get('/new-district', 'Admin\AdminController@newDistrict');
+Route::post('/new-district', 'Admin\AdminController@saveDistrict');
+Route::get('/profile','Admin\AdminController@profile');
+
 
 
 Route::group(['middleware' => ['role:Super Admin|Finance Officer|Approval Officer|Secretary|Monitoring Officer']], function () {
@@ -35,6 +39,7 @@ Route::group(['middleware' => ['role:Super Admin|Finance Officer|Approval Office
     Route::get('/new-applicant', 'Admin\AdminController@newApplicant'); 
     Route::post('/new-applicant', 'Admin\AdminController@saveNewApplicant'); 
     Route::get('/search', 'Admin\AdminController@searchApplicant'); 
+    Route::get('/download-pdf/{id}', 'Admin\AdminController@downloadApplicantPDF');
 });
 
 

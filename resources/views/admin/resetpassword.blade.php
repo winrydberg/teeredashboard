@@ -86,34 +86,24 @@ height: auto;
                                       @if(Session::has('error'))
                                     <p class="alert alert-danger">{{Session::get('error')}}</p>
                                       @endif
-                                    <form class="form-horizontal form-simple" method="POST" action="{{url('/actor/reset-password')}}">
+                                    <form class="form-horizontal form-simple" method="POST" action="{{url('/reset-password')}}">
                                              {{csrf_field()}}   
                                              <fieldset class="form-group position-relative has-icon-left">
-                                                    <input type="password" name="newpassword" class="form-control form-control-lg input-lg" id="user-password" placeholder="New Password" required="">
+                                                    <input type="email" name="email" class="form-control form-control-lg input-lg" id="user-password" placeholder="Enter Email" required="">
                                                     <div class="form-control-position">
-                                                        <i class="fa fa-key"></i>
+                                                        <i class="fa fa-envelope"></i>
                                                     </div>
                                                 </fieldset>
-                                            <fieldset class="form-group position-relative has-icon-left">
-                                                <input type="password" name="confirmpassword" class="form-control form-control-lg input-lg" id="cuser-password" placeholder="Confirm Password" required="">
-                                                <div class="form-control-position">
-                                                    <i class="fa fa-key"></i>
-                                                </div>
-                                            </fieldset>
-
-                                        <input type="text" hidden value="{{ app('request')->input('token') }}" name="token" class="form-control form-control-lg input-lg" id="token" placeholder="Confirm Password" required="">
-                                        <input type="text"  hidden value="{{ app('request')->input('uid') }}" name="bin" class="form-control form-control-lg input-lg" id="bin" placeholder="Confirm Password" required="">
-
-
-                                            <button type="submit" class="btn btn-lg btn-block" style="background:black;color:white"><i class="ft-unlock"></i> Login</button>
+                                   
+                                            <button type="submit" class="btn btn-lg btn-block" style="background:black;color:white"><i class="ft-unlock"></i> Reset Password</button>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    {{-- <div class="">
-                                        <p class="float-sm-left text-center m-0" ><a href="#" class="card-link"><span style="color:black">Recover password</span></a></p>
+                                    <div class="">
+                                    <p class="float-sm-left text-center m-0" ><a href="{{url('login')}}" class="card-link"><span>Login Here</span></a></p>
                                        
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

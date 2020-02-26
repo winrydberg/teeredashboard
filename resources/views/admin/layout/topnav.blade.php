@@ -52,25 +52,19 @@
             </ul>
           </li>
 
-          <li class="dropdown dropdown-user nav-item"><a href="#" data-toggle="dropdown"
-              class="dropdown-toggle nav-link dropdown-user-link"><span class="avatar avatar-online"><img
-                  src="{{asset('assets/images/profile.png')}}" alt="avatar"><i></i></span><span class="user-name">
-
-              </span></a>
+          <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#"
+              data-toggle="dropdown"><span class="avatar avatar-online"><img
+                  src="{{asset('assets/images/profile.png')}}" alt="avatar"><i></i></span><span
+                class="user-name">John Doe</span></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-divide"></div><a href="{{url('/logout')}}" class="dropdown-item"><i
-                    class="ft-power"></i> Logout</a>
-              </div>
+            <a class="dropdown-item" href="{{url('profile')}}"><i class="ft-user"></i> Profile</a>
+              <a class="dropdown-item" href="#"><i class="ft-mail"></i> My Inbox</a>
+              <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{url('logout')}}"><i class="ft-power"></i> Logout</a>
             </div>
-
-            <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-menu dropdown-menu-right">
-                  <div class="dropdown-divide"></div><a href="{{url('/logout')}}" class="dropdown-item"><i
-                      class="ft-power"></i> Logout</a>
-                </div>
-              </div>
           </li>
+
+    
 
         </ul>
       </div>

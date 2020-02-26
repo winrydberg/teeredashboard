@@ -1,5 +1,8 @@
 @extends('admin.layout.base')
 
+@section('styles-below')
+<link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/css/forms/selects/select2.min.css')}}">
+@stop
 
 @section('content')
 <div class="row">
@@ -81,7 +84,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="adminlevel">DISTRICT</label>
-                                        <select id="adminlevel" required name="district" class="form-control">
+                                        <select  required name="district" class="select2 form-control">
                                             <option value="" selected="" disabled="">Select District</option>
                                             @foreach($districts as $d)
                                                 <option value="{{$d->id}}">{{$d->name}}</option>
@@ -115,6 +118,7 @@
 
 
 @section('scripts-below')
+<script src="{{asset('assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
     <script>
           $(document).ready(function(){ 

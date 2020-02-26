@@ -17,6 +17,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 use App\Admin;
 use App\Applicant;
+use App\ApprovedApplication;
 use App\District;
 use App\User;
 use App\Region;
@@ -28,9 +29,41 @@ class AdminController extends Controller
     //     $this->middleware('auth:admin');
     // }
     public function dashboard(){
+        $searchterm  = request()->query('search');
+        
+        if($searchterm != null){
+           $applicants = Applicant::where('firstname','LIKE', "%".$searchterm."%")->orWhere('lastname','LIKE', "%".$searchterm."%")->orWhere('phoneno','LIKE', "%".$searchterm."%")->get();
+        }
         $approvedCount = Applicant::where('approved', true)->count();
         $unapprovedCount = Applicant::where('approved', false)->count();
-        return view('admin.dashboard', compact('approvedCount','unapprovedCount'));
+
+        $districts = District::all();
+
+        $thedistricts = [];
+        $thedistrictsApprouvedCount =[];
+        $thedistrictsUnApprovedCount = [];
+
+        foreach($districts as $d){
+            array_push($thedistricts, $d->name);
+            array_push($thedistrictsApprouvedCount, Applicant::where('approved', true)->where('district',$d->name)->count());
+            array_push($thedistrictsUnApprovedCount, Applicant::where('approved', false)->where('district',$d->name)->count());
+        }
+        
+        $admindistrict = District::where('id', Auth::guard('admin')->user()->district_id)->first();
+        $pieApproved = Applicant::where('approved',true)->where('district',$admindistrict->name)->count();
+        $pieUnApproved = Applicant::where('approved',false)->where('district',$admindistrict->name)->count();
+        
+
+
+        return view('admin.dashboard', compact('approvedCount','unapprovedCount', 
+        'applicants', 'thedistricts','thedistrictsApprouvedCount','thedistrictsUnApprovedCount',
+      'pieApproved','pieUnApproved'));
+       
+    }
+
+    public function profile(){
+        $admin = Auth::guard('admin')->user();
+        return view('admin.profile', compact('admin'));
     }
 
     public function approvedApllications(){
@@ -105,19 +138,25 @@ class AdminController extends Controller
     }
 
     public function admins(){
-        $admins = Admin::all();
+        $admins = Admin::where('district_id', Auth::guard('admin')->user()->district_id)->get();
         $roles= Role::all();
         return view('admin.admins', compact('admins','roles'));
     }
 
     public function getDetails($id){
          $appid = substr($id, -1);
+         $hasApproved = ApprovedApplication::where('applicant_id', $appid)->where('admin_id', Auth::guard('admin')->user()->id)->first();
+        
          if($appid != null){
                 $applicant = Applicant::find($appid);
-                return view('admin.applicantdetails', compact('applicant'));
+                return view('admin.applicantdetails', compact('applicant','hasApproved'));
          }else{
              return back();
          }
+    }
+    public function newDistrict(){
+        $regions = Region::all();
+        return view('admin.newdistricts', compact('regions'));
     }
 
     public function sendSMS(){
@@ -129,14 +168,52 @@ class AdminController extends Controller
         // dd($regions);
         return view('admin.newapplicant');
     }
+    public function saveDistrict(Request $r){
+        $district = new District();
+        $district->name = $r->name;
+        $district->region_id = $r->region;
+        if($district->save()){
+            Session::flash('success','District recorded on the system');
+            return back();
+        }else{
+            Session::flash('error','Unable to add district. Please try again');
+            return back();
+        }
+    }
 
     public function saveNewApplicant(Request $r){
-        //  return $r->all();
+        //   return $r->all();
+        
         if($r->hasFile('passport')){
-            $extension = ucwords(File::extension($r->file('passport')->getClientOriginalName()));
+            $user = null;
+            $u = User::where('phoneno',$r->phoneno)->first();
+            // return $u;
+            if($u != null){
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'User With Phone Number Already Exist.'
+                ]);
+            }
+            $user = User::create([
+                'firstname' => $r->firstname,
+                'lastname' => $r->lastname,
+                'email' => $r->email,
+                'password' => Hash::make($r->password),
+                'phoneno' => $r->phoneno
+            ]);
+            if($user == null){
+               return response()->json([
+                   'status' => 'error',
+                   'message' => 'Oops Something Went Wrong. Please Contact Administrators'
+               ]);
+            }
+            $extension = strtoupper(File::extension($r->file('passport')->getClientOriginalName()));
             $fileName = $r->file('passport')->getClientOriginalName();
             if ($extension == "JPG" || $extension == "PNG"|| $extension == "JPEG"|| $extension == "GIF") {
                 $r->file('passport')->move(public_path() . "/uploads/",$fileName);
+                $dist = District::find(Auth::guard('admin')->user()->district_id);
+                $region = Region::find($dist->region_id);
+                         
                 $applicant = new Applicant();
                 $applicant->firstname = $r->firstname;
                 $applicant->lastname = $r->lastname;
@@ -160,13 +237,14 @@ class AdminController extends Controller
                 $applicant->dependants = $r->dependants;
                 $applicant->objective = json_encode($this->returnFundReasonArray($r->income, $r->educational,$r->organization, $r->medical, $r->skillsdev));
                 $applicant->intentoffund = $r->fundintents;
-                $applicant->total_amount = $r->totalamount;
+                $applicant->total_amount = $r->amount;
                 $applicant->groupapplication = $r->groupapplication;
                 $applicant->breakdown = $r->budgets;
                 $applicant->info_approval = $r->info_approval;
-                $applicant->region = $r->region;
-                $applicant->district = $r->district;
+                $applicant->region = $region->name;
+                $applicant->district = $dist->name;
                 $applicant->approved = false;
+                $applicant->user_id = $user->id;
 
                 if($applicant->save()){
                     return response()->json([
@@ -178,10 +256,9 @@ class AdminController extends Controller
                         'status'=>'error',
                         'message' => 'OOps Something went wrong. Please try again'
                     ]); 
-                }
-        
-                   
+                }                   
             }else{
+                $user->delete();
                 return response()->json([
                     'status'=>'error',
                     'message' => 'Invalid Image File'
@@ -237,9 +314,23 @@ class AdminController extends Controller
 
     public function downloadApplicantPDF($id){
         $applicant = Applicant::where('id', $id)->first();
-        return view('pdfs.applicants', compact('applicant'));
+        $approvals = ApprovedApplication::where('applicant_id', $applicant->id)->get();
+       $admins = [];
+        foreach($approvals as $ap){
+        $admin = Admin::find($ap->admin_id);
+        if($admin != null){
+            array_push($admins, $admin );
+        }
+       }
+       $apcount = $approvals->count();
+
+        for($i=0; $i<(3-$apcount); $i++){
+            array_push($admins, null);
+        }
+    //    dd($admins);
+        // return view('pdfs.applicants', compact('applicant'));
        
-        $pdf = PDF::loadView('pdfs.applicants', compact('applicant'));
+        $pdf = PDF::loadView('pdfs.applicants', compact('applicant','admins'));
         return $pdf->stream();
         return $pdf->download('applicant.pdf');
     }

@@ -119,8 +119,14 @@
                                 <div class="col-md-6">
                                     <div class="col-md-12">
                                         <p style="text-transform:uppercase">
-                                            <strong>DISABILITY TYPE: </strong> <span
-                                                style="margin-left:20px;">{{$applicant->disabilitytype}}</span>
+                                            <strong>DISABILITY TYPE: </strong> 
+                                            <br>
+                                            <?php 
+                                                 $diabilities = json_decode($applicant->disabilitytype);
+                                            ?>
+                                            @foreach($diabilities as  $key=>$d)
+                                            <span style="margin-left:20px;">#{{$key+1}}  - {{$d}}</span><br>
+                                            @endforeach
                                         </p>
                                     </div>
                                 </div>
@@ -239,16 +245,16 @@
                                     <div class="col-md-6">
                                         <div class="col-md-12">
                                             <p style="text-transform:uppercase">
-                                                <strong>REASON FOR REQUESTING FUND: </strong> 
+                                                <strong>AREAS APPLICANT IS SEEKING FUND TO UNDERTAKE: </strong> 
 
                                                 @if($applicant->objective != null || $applicant->objective != "")
                                                         <?php
-                                                           $reasons = $applicant->objective;
-                                                           preg_match_all("/\[(.*?)\]/", $reasons, $matches); 
-                                                           $res = explode(',', $matches[1][0]);
+                                                           $reasons = json_decode($applicant->objective);
+                                                          // preg_match_all("/\[(.*?)\]/", $reasons, $matches); 
+                                                           //$res = explode(',', $matches[1][0]);
                                                         ?>
 
-                                                        @foreach ($res as $item)
+                                                        @foreach ($reasons as $item)
                                                           <li>{{$item}}</li>
                                                         @endforeach
 
@@ -280,14 +286,60 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                <p style="text-transform:uppercase">
+                                                    <strong>WHAT APPLICANT INTEND TO DO WITH FUND: </strong> <span
+                                                        style="margin-left:20px;">{{$applicant->intentoffund}}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                <p style="text-transform:uppercase">
+                                                    <strong>TOTAL AMOUNT REQUESTED: </strong> <span
+                                                        style="margin-left:20px;">GHC {{$applicant->total_amount}}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
 
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <p style="text-transform:uppercase">
+                                                        <strong>BUDGET BREAKDOWN: </strong> <span
+                                                            style="margin-left:20px;">{{$applicant->budgets}}</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                      
+                                        </div>
+                                    </div>
+                                </div>
 
                         <hr>
                         <div class="row">
                                 <div class="col-md-12">
                                     @role('Approval Officer|Super Admin')
+                                    @if($hasApproved == null)
                                         <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-success">APPROVE APPLICANT</button>
                                         <button type="button" data-toggle="modal" data-target="#disapprove" class="btn btn-danger">DISAPPROVE APPLICANT</button>
+                                    @else
+                                       <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-warning">YOU HAVE ALREADY APPROVED APPLICANT </button>
+                                       
+                                    @endif
+                                       
                                     @endrole  
                                     {{-- <button class="btn btn-primary" id="print">PRINT</button> --}}
                                 <a target="_blank" href="{{url('/download-pdf/'.$applicant->id)}}" class="btn btn-info">DOWNLOAD IN PDF</a>

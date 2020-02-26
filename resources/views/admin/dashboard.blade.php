@@ -10,15 +10,15 @@
                                     <div class="media-body text-left">
                                        
                                         <span> <h5>TOTAL APPROVALS</h5></span>
-                                    <h3 class="danger">{{$approvedCount}}</h3>
+                                    <h3 class="info">{{$approvedCount}}</h3>
                                         
                                     </div>
                                     <div class="media-right media-middle">
-                                        <i class="ft-users danger font-large-2 float-right"></i>
+                                        <i class="ft-users info font-large-2 float-right"></i>
                                     </div>
                                 </div>
                                 <div class="progress mt-1 mb-0" style="height: 7px;">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>
@@ -71,82 +71,227 @@
 
     </div>
 
-    <div class="row">
-            <div class="col-xl-12 col-lg-12 col-12">
-                    <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">SEARCH APPLICANT</h4>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-body">
-                                {{-- <div class="card-block"> --}}
-                                <form  method="GET" >
-                                    <fieldset>
-                                        <div class="input-group">
-                                            <input type="text" name="search" class="form-control" placeholder="Enter name">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="submit">
-                                                     <i class="fa fa-search"></i>  SEARCH
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                                {{-- </div> --}}
-                            </div>
+
+
+<section id="chartjs-pie-charts">
+        <div class="row">
+ <?php $district = App\District::where('id',Auth::guard('admin')->user()->district_id)->first(); ?>
+
+            <!-- Simple Pie Chart -->
+            <div class="col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                    <h4 class="card-title">DISTRICT APPROVAL PIE CHART -  {{$district->name}}</h4>
+                        <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                        <div class="heading-elements">
+                            <ul class="list-inline mb-0">
+                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                <li><a data-action="close"><i class="ft-x"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-content collapse show">
+                       <div class="card-body">
+                            <div class="height-400">
+                                <canvas id="simple-pie-chart"></canvas>
                             </div>
                         </div>
-            </div>
-    </div>
-
-    
-@if(isset($actors))  
-<div class="row">
-		<div class="col-xl-12 col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">SEARCH RESULTS</h4>
-                <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                <div class="heading-elements">
-                    <ul class="list-inline mb-0">
-                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-content">
-                <div class="table-responsive">
-                    <table id="recent-orders" class="table table-hover mb-0 ps-container ps-theme-default">
-                        <thead>
-                            <tr>
-                                <th>BIN</th>
-                                <th>Name</th>
-                                {{-- <th>ACTOR TYPE</th> --}}
-                                <th>DIGITAL ADDRESS</th>
-                                <th>PHONE NO.</th>
-                                <th>ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($actors as $a)
-                            <tr>
-                            <td class="text-truncate">{{$a->bin}}</td>
-                            <td class="text-truncate">{{$a->name}}</td>
-                            {{-- <td class="text-truncate">{{$a->}}</td> --}}
-                            <td class="text-truncate">{{$a->digital_address}}</td>
-                            <td class="text-truncate">{{$a->phoneno}}</td>
-                            <td class="text-truncate">
-                                <a href="#" class="btn btn-danger">View Transactions</a>
-                            </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+</section>
 
-</div>
-@endif
+<section id="chartjs-bar-charts">
+        <!-- Bar Chart -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">OVERALL APPLICANT BAR CHART</h4>
+                        <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                        <div class="heading-elements">
+                            <ul class="list-inline mb-0">
+                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                <li><a data-action="close"><i class="ft-x"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-content collapse show">
+                        <div class="card-body">
+                            <div class="height-400">
+                                <canvas id="bar-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+
 
 @endsection
+
+@section('scripts-below')
+<script src="{{asset('assets/vendors/js/charts/chart.min.js')}}"></script>
+{{-- <script src="{{asset('assets/js/scripts/charts/chartjs/pie-doughnut/pie.js')}}"></script> --}}
+{{-- <script src="{{asset('assets/js/scripts/charts/chartjs/pie-doughnut/pie-simple.js')}}"></script> --}}
+{{-- <script src="{{asset('assets/js/scripts/charts/chartjs/bar/bar.js')}}"></script> --}}
+{{-- <script src="{{asset('assets/js/scripts/charts/chartjs/bar/bar-stacked.js')}}"></script>
+<script src="{{asset('assets/js/scripts/charts/chartjs/bar/bar-multi-axis.js')}}"></script>
+<script src="{{asset('assets/js/scripts/charts/chartjs/bar/column.js')}}"></script>
+<script src="{{asset('assets/js/scripts/charts/chartjs/bar/column-stacked.js')}}"></script>
+<script src="{{asset('assets/js/scripts/charts/chartjs/bar/column-multi-axis.js')}}"></script> --}}
+
+<script>
+/*=========================================================================================
+    File Name: pie.js
+    Description: Chartjs pie chart
+    ----------------------------------------------------------------------------------------
+    Item Name: Stack - Responsive Admin Theme
+    Version: 2.1
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+// Pie chart
+// ------------------------------
+$(window).on("load", function(){
+
+//Get the context of the Chart canvas element we want to select
+var ctx = $("#simple-pie-chart");
+
+// Chart Options
+var chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    responsiveAnimationDuration:500,
+};
+
+// Chart Data
+var chartData = {
+    labels: ["Approved", "Pending Approval", "Disapproved"],
+    datasets: [{
+        label: "Approval PIE Chart",
+        data: [<?php echo $pieApproved?>, <?php echo $pieUnApproved?>, 2],
+        backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D','#FF4558', '#16D39A'],
+    }]
+};
+
+var config = {
+    type: 'pie',
+
+    // Chart Options
+    options : chartOptions,
+
+    data : chartData
+};
+
+// Create the chart
+var pieSimpleChart = new Chart(ctx, config);
+});
+</script>
+
+<script>
+    /*=========================================================================================
+    File Name: bar.js
+    Description: Chartjs bar chart
+    ----------------------------------------------------------------------------------------
+    Item Name: Stack - Responsive Admin Theme
+    Version: 2.1
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+// Bar chart
+// ------------------------------
+$(window).on("load", function(){
+
+//Get the context of the Chart canvas element we want to select
+var ctx = $("#bar-chart");
+
+// Chart Options
+var chartOptions = {
+    // Elements options apply to all of the options unless overridden in a dataset
+    // In this case, we are setting the border of each horizontal bar to be 2px wide and green
+    elements: {
+        rectangle: {
+            borderWidth: 2,
+            borderColor: 'rgb(0, 255, 0)',
+            borderSkipped: 'left'
+        }
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    responsiveAnimationDuration:500,
+    legend: {
+        position: 'top',
+    },
+    scales: {
+        xAxes: [{
+            display: true,
+            gridLines: {
+                color: "#f3f3f3",
+                drawTicks: false,
+            },
+            scaleLabel: {
+                display: true,
+            }
+        }],
+        yAxes: [{
+            display: true,
+            gridLines: {
+                color: "#f3f3f3",
+                drawTicks: false,
+            },
+            scaleLabel: {
+                display: true,
+            }
+        }]
+    },
+    title: {
+        display: false,
+        text: 'Chart.js Horizontal Bar Chart'
+    }
+};
+
+// Chart Data
+var chartData = {
+    labels: <?php echo json_encode($thedistricts); ?>,
+    datasets: [{
+        label: "Approved Applicants",
+        data: <?php echo json_encode($thedistrictsApprouvedCount); ?>,
+        backgroundColor: "#16D39A",
+        hoverBackgroundColor: "rgba(22,211,154,.9)",
+        borderColor: "transparent"
+    }, {
+        label: "Unapproved /Pending Approval Applicants",
+        data: <?php echo json_encode($thedistrictsUnApprovedCount); ?>,
+        backgroundColor: "#F98E76",
+        hoverBackgroundColor: "rgba(249,142,118,.9)",
+        borderColor: "transparent"
+    }]
+};
+
+var config = {
+    type: 'horizontalBar',
+    // type: 'verticalBar',
+
+
+    // Chart Options
+    options : chartOptions,
+
+    data : chartData
+};
+
+// Create the chart
+var lineChart = new Chart(ctx, config);
+});
+</script>
+<!-- END PAGE LEVEL JS-->
+@stop

@@ -103,7 +103,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="phoneNumber3">Phone Number :</label>
-                                            <input type="tel" class="form-control" id="phoneNumber3">
+                                            <input type="tel" name="phoneno" class="form-control" id="phoneNumber3">
                                         </div>
                                     </div>
 
@@ -152,7 +152,7 @@
                                                 <span class="danger">*</span>
                                             </label>
                                             <select class="custom-select form-control " id="idtype"
-                                                name="maritalstatus">
+                                                name="marital_status">
                                                 <option value="">Select Marittal Status</option>
                                                 <option value="Single">Single</option>
                                                 <option value="Maried">Maried</option>
@@ -167,13 +167,33 @@
                                                 <span class="danger">*</span>
                                             </label>
                                             <select class="custom-select form-control " id="idtype"
-                                                name="maritalstatus">
+                                                name="gfdmember">
                                                 <option value="">GFD Member?</option>
                                                 <option value="Yes">Yes</option>
                                                 <option value="No">No</option>
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+                              
+                                <div class="row">
+                                        <legend>Applicant Account Info</legend>
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="location"> Password :
+                                                        <span class="danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control" id="password" name="password">
+                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="location">Repeat Password :
+                                                        <span class="danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control" id="confirmpassword" name="confirmpassword">
+                                                </div>
+                                        </div>
                                 </div>
                             </fieldset>
 
@@ -250,7 +270,7 @@
                                                 Street Name :
                                                 <span class="danger">*</span>
                                             </label>
-                                            <input type="text" class="form-control" id="streetname" name="streetname">
+                                            <input type="text" class="form-control" id="streetname" name="streenname">
                                         </div>
 
                                     </div>
@@ -262,21 +282,21 @@
                                                 <span class="danger">*</span>
                                             </label>
                                             <input type="text" class="form-control" id="postaladdress"
-                                                name="postaladdress">
+                                                name="houseno">
                                         </div>
                                         <div class="form-group">
                                             <label for="eventName3">
                                                 Contact No :
                                                 <span class="danger">*</span>
                                             </label>
-                                            <input type="text" class="form-control" id="contactno" name="contactno">
+                                            <input type="text" class="form-control" id="contactno" name="phoneno">
                                         </div>
                                         <div class="form-group">
                                             <label for="eventName3">
                                                 Business Location :
                                                 <span class="danger">*</span>
                                             </label>
-                                            <input type="text" class="form-control" id="bislocation" name="bizlocation">
+                                            <input type="text" class="form-control" id="bislocation" name="business_location">
                                         </div>
                                     </div>
                                 </div>
@@ -293,7 +313,7 @@
                                                 <span class="danger">*</span>
                                             </label>
                                             <select class="custom-select form-control " id="idtype"
-                                                name="maritalstatus">
+                                                name="education">
                                                 <option value="">Select Education</option>
                                                 <option value="None">None</option>
                                                 <option value="Basic">Basic</option>
@@ -326,7 +346,7 @@
                                                 <span class="danger">*</span>
                                             </label>
                                             <input type="text" class="form-control " id="yearsinbusiness"
-                                                name="yearsinbusiness">
+                                                name="yearsinobusines">
                                         </div>
                                     </div>
                                 </div>
@@ -338,7 +358,7 @@
                                                 Number Of Depedants :
                                                 <span class="danger">*</span>
                                             </label>
-                                            <input type="number" class="form-control" id="depedants" name="depedants">
+                                            <input type="number" class="form-control" id="depedants" name="dependants">
                                         </div>
                                     </div>
                                 </div>
@@ -393,7 +413,7 @@
                                                 For group applications, Enter list of beneficiaries names.:
                                                 <span class="danger">*</span>
                                             </label>
-                                            <textarea class="form-control" name="groupallication"
+                                            <textarea class="form-control" name="groupapplication"
                                                 placeholder="Eg. John Doe, Jane Doe, Owusu Aboagye"></textarea>
                                         </div>
                                     </div>
@@ -401,8 +421,8 @@
 
                                 </div>
                             </fieldset>
-                            <h6>Step 8</h6>
-                            <fieldset>
+                            {{-- <h6>Step 8</h6> --}}
+                            {{-- <fieldset>
                                     <div class="row">
                                             <div class="col-md-6">
                                                     <div class="form-group">
@@ -414,9 +434,9 @@
                                                     </div>
                                             </div>
                                     </div>
-                            </fieldset>
+                            </fieldset> --}}
 
-                            <h6>Step 9</h6>
+                            <h6>Step 8</h6>
                             <fieldset>
                                     <div class="row">
                                             <div class="col-md-6">
@@ -434,7 +454,7 @@
                                                                Budget Breakdown :
                                                             <span class="danger">*</span>
                                                         </label>
-                                                       <textarea class="form-control" name="budget" placeholder="Budget Breakdown "></textarea>
+                                                       <textarea class="form-control" name="budgets" placeholder="Budget Breakdown "></textarea>
                                                     </div>
                                             </div>
                                     </div>
@@ -446,13 +466,13 @@
                                                         <label>Disclosure Statement by Applicant:</label>
                                                         <div class="c-inputs-stacked">
                                                             <div class="custom-control custom-checkbox">
-                                                                <input type="radio" name="agree"
+                                                                <input type="radio" name="agree" value="1"
                                                                     id="item21">
                                                                 <label class="custom-control-label" for="item21">I Agree</label>
                                                             </div>
                                                             <div class="custom-control custom-checkbox">
                                                                 <input type="radio" name="agree" 
-                                                                    id="item22">
+                                                                    id="item22" value="0">
                                                                 <label class="custom-control-label" for="item22">I Disagree</label>
                                                             </div>
                                                           
@@ -674,6 +694,9 @@ $(".steps-validation").steps({
     },
     onFinished: function (event, currentIndex)
     {
+      var agree = $('input[name="agree"]:checked').val();
+      if(agree==1 | agree=='1'){
+      
         $("#loadMe").modal({
       backdrop: "static", //remove ability to close modal with click
       keyboard: false, //remove option to close with keyboard
@@ -695,8 +718,13 @@ $(".steps-validation").steps({
             $("#loadMe").modal("hide");
             console.log(response)
             if(response.status =='success'){
+                $("#loadMe").modal("hide");
                 swal("Success",response.message,'success'); 
+                setTimeout(function(){
+                    window.location.reload(true);
+                },1000)
             }else{
+                $("#loadMe").modal("hide");
                 swal("Error",'Sorry.. Application Not Sent.'+response.message,'error');
             }
         },
@@ -705,6 +733,10 @@ $(".steps-validation").steps({
             swal("Error",'Sorry.. Applicantion Could Not be sent. Please try again','error');
         }
     });
+
+}else{
+    swal("Info",'Applicant Must Agree to Terms','info');
+}
 
     }
 })
