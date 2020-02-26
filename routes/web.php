@@ -63,3 +63,10 @@ Route::group(['middleware' => ['role:Approval Officer|Super Admin']], function (
     Route::get('/approved-excel', 'Admin\ApprovalOfficerController@exportApprovedApplicants');
     Route::get('/unapproved-excel', 'Admin\ApprovalOfficerController@exportUnApprovedApplicants');
 });
+
+Route::group(['middleware' => ['role:Monitoring Officer|Super Admin']], function () {
+    
+    Route::get('/my-monitorings', 'Admin\MonitoringOfficerController@myMonitorings');
+    Route::get('/disbursed-applicants', 'Admin\MonitoringOfficerController@disbursedApplicants');
+   
+});

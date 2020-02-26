@@ -20,9 +20,11 @@
                             <tr>
                                 <th>ID</th>
                                 <th>NAME</th>
-                                <th>REGION</th>
+                                {{-- <th>REGION</th> --}}
                                 <th>DISTRICT</th>
                                 <th>PHONE NO.</th>
+                                <th>APPROVED AMT.</th>
+
                                 <th>ACTION</th>
                             </tr>
                         </thead>
@@ -31,9 +33,10 @@
                             <tr>
                                 <td class="text-truncate">TEERE{{$a->id}}</td>
                                 <td class="text-truncate">{{$a->firstname." ". $a->lastname}}</td>
-                                <td class="text-truncate">{{$a->region}}</td>
+                                {{-- <td class="text-truncate">{{$a->region}}</td> --}}
                                 <td class="text-truncate">{{$a->district}}</td>
                                 <td class="text-truncate">{{$a->phoneno}}</td>
+                                <td class="text-truncate">GHC {{$a->approvedAmt}}</td>
                                 <td class="text-truncate">
                                     <a href="{{url('/applicant-details/teere00'.$a->id)}}" class="btn btn-success">VIEW
                                         DETAILS</a>

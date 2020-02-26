@@ -17,13 +17,13 @@
             </div>
             <div class="card-content">
                 <div class="table-responsive">
-                    <table id="recent-orders" class="table table-hover mb-0 ps-container ps-theme-default">
+                    <table id="recent-orders" class="table table-hover mb-0 ps-container ps-theme-default responsive">
                         <thead>
                             <tr>
                                 <th>NAME</th>
                                 <th>EMAIL</th>
                                 {{-- <th>ACTOR TYPE</th> --}}
-                                <th>PHONENO</th>
+                                {{-- <th>PHONENO</th> --}}
                                 <th>ROLE</th>
                                 <th>ACTION</th>
                             </tr>
@@ -34,8 +34,17 @@
                             <td class="text-truncate">{{$a->name}}</td>
                             <td class="text-truncate">{{$a->email}}</td>
                             {{-- <td class="text-truncate">{{$a->}}</td> --}}
-                            <td class="text-truncate">{{$a->phoneno}}</td>
-                            <td>{{$a->roles->pluck('name')[0]}}</td>
+                            {{-- <td class="text-truncate">{{$a->phoneno}}</td> --}}
+                            <?php
+                                 $roles = $a->roles->pluck('name')
+                            ?>
+                            <td>
+                                <p>
+                                @foreach ($roles as $r)
+                            <span>{{$r}},</span>
+                                @endforeach
+                            </p>
+                            </td>
                             {{-- @if($a->role_id ==1)
                             <td class="text-truncate">SUPER ADMIN</td>
                             @elseif($a->role_id ==2)
@@ -49,6 +58,7 @@
                                      <i class="fa fa-remove"></i>
                                      DELETE</button>
                                  @endif
+                                 <a href="{{url('admins/'.$a->id)}}" class="btn btn-sm btn-primary">View Details</a>
                             </td>
                             </tr>
                             @endforeach

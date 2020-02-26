@@ -93,12 +93,26 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
+                                                
+
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput3">ROLE</label>
-                                                            <input type="email" id="projectinput3" required class="form-control" disabled value="{{$admin->roles->pluck('name')[0]}}" placeholder="E-mail" name="email">
+                                                            
+                                                            <label for="projectinput3"> STAFF ROLE(S)</label>
+                                                            <?php 
+                                                                  $roles = json_decode($admin->adminroles);
+                                                                
+                                                            ?>
+                                                         
+                                                            <select disabled class="select2 form-control block" name="roles[]" multiple="multiple" style="width: 100%">
+                                                                   @foreach($roles as $r)
+                                                                     <option selected value="{{$r}}">{{$r}}</option>
+                                                                   @endforeach
+                                                                    
+                                                            </select>
+                                                    
                                                         </div>
-                                                    </div>
+                                                        </div>
                     
                 
                                             </div>
@@ -140,6 +154,8 @@
 
 @section('scripts-below')
 <script src="{{asset('assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+<script src="{{asset('assets/js/scripts/forms/select/form-select2.js')}}"></script>
+
 {{-- <script src="{{asset('assets/js/scripts/charts/echarts/bar-column/stacked-column.js')}}"></script>
 <script src="{{asset('assets/js/scripts/charts/echarts/radar-chord/non-ribbon-chord.js')}}"></script>
 <script src="{{asset('assets/js/scripts/gallery/photo-swipe/photoswipe-script.js')}}">

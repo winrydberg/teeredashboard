@@ -27,7 +27,8 @@ class CreateAdminsTable extends Migration
             $table->string('image')->nullable();
             $table->string('password');
             $table->string('phoneno')->nullable();
-            $table->integer('level'); //
+            $table->integer('level')->nullable(); //
+            $table->string('adminroles')->nullable();
             $table->bigInteger('district_id')->unsigned();
             $table->foreign('district_id')->references('id')->on('districts');
             $table->timestamps();

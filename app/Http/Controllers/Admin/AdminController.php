@@ -36,6 +36,7 @@ class AdminController extends Controller
         }
         $approvedCount = Applicant::where('approved', true)->count();
         $unapprovedCount = Applicant::where('approved', false)->count();
+        // $disapprovedCount = Applicant::where('disapproved', true)->count();
 
         $districts = District::all();
 
@@ -51,14 +52,24 @@ class AdminController extends Controller
         
         $admindistrict = District::where('id', Auth::guard('admin')->user()->district_id)->first();
         $pieApproved = Applicant::where('approved',true)->where('district',$admindistrict->name)->count();
-        $pieUnApproved = Applicant::where('approved',false)->where('district',$admindistrict->name)->count();
+        $pieUnApproved = Applicant::where('approved',false)->where('disapproved', false)->where('district',$admindistrict->name)->count();
+        $pieDisApproved = Applicant::where('disapproved',true)->where('district',$admindistrict->name)->count();
         
 
 
         return view('admin.dashboard', compact('approvedCount','unapprovedCount', 
         'applicants', 'thedistricts','thedistrictsApprouvedCount','thedistrictsUnApprovedCount',
-      'pieApproved','pieUnApproved'));
+      'pieApproved','pieUnApproved','pieDisApproved'));
        
+    }
+
+    public function searchApplicant (){
+
+        $searchterm  = request()->query('search');
+        if($searchterm != null){
+            $applicants = Applicant::where('firstname','LIKE', "%".$searchterm."%")->orWhere('lastname','LIKE', "%".$searchterm."%")->orWhere('phoneno','LIKE', "%".$searchterm."%")->get();
+         }
+        return view('admin.search', compact('applicants'));
     }
 
     public function profile(){
@@ -78,6 +89,8 @@ class AdminController extends Controller
     }
 
     public function saveAdmin(Request $r){
+
+        
         $admin = new Admin();
         $admin->name = $r->name;
         $admin->email = $r->email;
@@ -86,26 +99,30 @@ class AdminController extends Controller
         $admin->level = $r->adminlevel;
         $admin->district_id = $r->district;
 
-      
+        $roles = $r->roles;
+        $admin->adminroles = json_encode($roles);
 
-        switch($r->adminlevel){
-            case 1:
-            $admin->assignRole('Super Admin');
-            break;
-            case 2:
-            $admin->assignRole('Finance Officer');
-            break;
-            case 3:
-            $admin->assignRole('Monitoring Officer');
-            break;
-            case 4:
-            $admin->assignRole('Secretary');
-            break;
-            case 5:
-            $admin->assignRole('Approval Officer');
-            break;
-
+        foreach($roles as $r){
+            $admin->assignRole($r);
         }
+
+        // switch($r->adminlevel){
+        //     case 1:
+        //     $admin->assignRole('Super Admin');
+        //     break;
+        //     case 2:
+        //     $admin->assignRole('Finance Officer');
+        //     break;
+        //     case 3:
+        //     $admin->assignRole('Monitoring Officer');
+        //     break;
+        //     case 4:
+        //     $admin->assignRole('Secretary');
+        //     break;
+        //     case 5:
+        //     $admin->assignRole('Approval Officer');
+        //     break;
+        // }
         if($admin->save()){
             Session::flash('success', 'User account successfully created');
             return back();

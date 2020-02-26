@@ -21,11 +21,26 @@ class CreateMonitorsTable extends Migration
             $table->date('registered');
             $table->bigInteger('applicant_id')->unsigned();
             $table->foreign('applicant_id')->references('id')->on('applicants');
+            $table->string('name')->nullable();
+            $table->string('disabilitytype')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('idtype')->nullable();
+            $table->string('houseno')->nullable();
+            $table->string('streetname')->nullable();
+            $table->string('postaladdress')->nullable();
+            $table->string('phoneno')->nullable();
             $table->text('activity_type');
             $table->text('activity_undertaken');
+            $table->text('expenditure')->nullable();
+            $table->boolean('made_gains')->default(false);
+            $table->text('gains')->nullable();
+            $table->text('nogain_reasons')->nullable();
+            $table->text('additional_info')->nullable();
+            $table->text('recommendations')->nullable();
             $table->integer('admin1')->nullable();
             $table->integer('admin2')->nullable();
             $table->integer('admin3')->nullable();
+
 
             $table->timestamps();
         });

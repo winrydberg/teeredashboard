@@ -14,6 +14,8 @@ use Auth;
 use Session;
 use DB;
 
+use App\District;
+
 class ApprovalOfficerController extends Controller
 {
     
@@ -67,6 +69,12 @@ class ApprovalOfficerController extends Controller
             }else if($applicant->approved3 == 0){
                 $applicant->approved2 = 1;
                 $applicant->approved = true;
+                $total = (int)$myValue['amount'];
+                $approveds= ApprovedApplication::where('applicant_id', $myValue['applicantid'])->get();
+                foreach($approveds as $ap){
+                   $total += (int)$ap->approvedAmt;
+                }
+                $applicant->approvedAmt = $total/3;
                 if($applicationApproval->save() && $applicant->save()){
                     return response()->json([
                         'status'=>'success',
@@ -95,7 +103,8 @@ class ApprovalOfficerController extends Controller
         $result = implode("", $krr);
 
         $admin = Auth::guard('admin')->user();
-        $approvedapplicants = Applicant::where('approved',true)->where('district', $admin->district_id)->get();
+        $district = District::where('id', $admin->district_id)->first();
+        $approvedapplicants = Applicant::where('approved',true)->where('district', $district->name)->get();
         
         $applicants =[];
         foreach($approvedapplicants as $user){

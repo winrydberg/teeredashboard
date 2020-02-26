@@ -1,6 +1,20 @@
 @extends('admin.layout.base')
 @section('content')
 <div class="row">
+    <div class="col-xl-12 col-md-12 col-sm-12">
+        <div class="card">
+            <div class="card-content">
+            <img class="card-img-top img-fluid" style="height: 60px;object-fit:cover;" src="{{asset('assets/images/carousel/02.jpg')}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">HELLO EDWIN,<br/> WELCOME TO TEERE DISABILITY FUND MANAGMENT PORTAL</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+        
 
         <div class="col-xl-4 col-lg-4 col-12">
                 <div class="card">
@@ -178,7 +192,7 @@ var chartData = {
     labels: ["Approved", "Pending Approval", "Disapproved"],
     datasets: [{
         label: "Approval PIE Chart",
-        data: [<?php echo $pieApproved?>, <?php echo $pieUnApproved?>, 2],
+        data: [<?php echo json_encode($pieApproved);?>, <?php echo json_encode($pieUnApproved);?>, <?php echo json_encode($pieDisApproved); ?>],
         backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D','#FF4558', '#16D39A'],
     }]
 };

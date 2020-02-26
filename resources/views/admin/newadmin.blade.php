@@ -1,6 +1,6 @@
 @extends('admin.layout.base')
 
-@section('styles-below')
+@section('page-styles')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/css/forms/selects/select2.min.css')}}">
 @stop
 
@@ -56,20 +56,16 @@
                             </div>
 
                             <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="adminlevel">STAFF TYPE</label>
-                                        <select id="adminlevel" required name="adminlevel" class="form-control">
-                                            <option value="" selected="" disabled="">Select Admin Level</option>
-                                           @foreach ($roles as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
+                                <div class="form-group">
+                                    <label for="projectinput3"> STAFF ROLE(S)</label>
+                                    <select class="select2 form-control block" name="roles[]" multiple="multiple" style="width: 100%">
+                                           @foreach($roles as $r)
+                                             <option value="{{$r->name}}">{{$r->name}}</option>
                                            @endforeach
-                                            {{-- <option value="1">SUPER ADMIN</option>
-                                            <option value="2">MONITORING OFFICER</option>
-                                            <option value="3">FINANCE OFFICER</option>
-                                            <option value="5">SECRETARY</option>
-                                            <option value="6">APPROVAL OFFICER</option> --}}
-                                        </select>
-                                    </div>
+                                            
+                                    </select>
+                            
+                                </div>
                                 </div>
                         </div>
 
@@ -84,7 +80,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="adminlevel">DISTRICT</label>
-                                        <select  required name="district" class="select2 form-control">
+                                        <select  required name="district" class="select2 form-control block" style="width: 100%">
                                             <option value="" selected="" disabled="">Select District</option>
                                             @foreach($districts as $d)
                                                 <option value="{{$d->id}}">{{$d->name}}</option>
@@ -119,6 +115,7 @@
 
 @section('scripts-below')
 <script src="{{asset('assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+<script src="{{asset('assets/js/scripts/forms/select/form-select2.js')}}"></script>
 
     <script>
           $(document).ready(function(){ 

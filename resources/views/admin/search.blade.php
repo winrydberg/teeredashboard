@@ -12,7 +12,7 @@
                             <form  method="GET" >
                                 <fieldset>
                                     <div class="input-group">
-                                        <input type="text" name="search" class="form-control" placeholder="Enter Name, Phone Number">
+                                        <input type="text" name="search" class="form-control" value="{{ request()->get('search') }}" placeholder="Enter Name, Phone Number">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="submit">
                                                  <i class="fa fa-search"></i>  SEARCH
@@ -50,8 +50,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>EMAIL</th>
+                            
                             <th>PHONE NO</th>
+                            <th>APPROVAL STATUS</th>
                             <th>ACTION</th>
                         </tr>
                     </thead>
@@ -61,10 +62,22 @@
                         <td class="text-truncate">TEERE0{{$a->id}}</td>
                         <td class="text-truncate">{{$a->firstname.' '.$a->lastname}}</td>
                         {{-- <td class="text-truncate">{{$a->}}</td> --}}
-                        <td class="text-truncate">{{$a->email?$r->email:'N/A'}}</td>
+                       
                         <td class="text-truncate">{{$a->phoneno}}</td>
+                        
                         <td class="text-truncate">
-                        <a href="{{url('/applicant-details/teere00'.$a->id)}}" class="btn btn-success">VIEW DETAILS</a>
+                            @if($a->approved ==1)
+                               <button class="btn btn-sm btn-success">
+                                   <i class="fa fa-check"></i>
+                                   APPROVED</button>
+                            @else
+                            <button class="btn btn-sm btn-danger">
+                                <i class="fa fa-remove"></i>
+                                NOT APPROVED</button>
+                            @endif
+                        </td>
+                        <td class="text-truncate">
+                        {{-- <a href="{{url('/applicant-details/teere00'.$a->id)}}" class="btn btn-success">VIEW DETAILS</a> --}}
                         <a href="{{url('/applicant-details/teere00'.$a->id)}}" class="btn btn-success">VIEW DETAILS</a>
                         </td>
                         </tr>

@@ -20,6 +20,7 @@
     <style type="text/css">
       .ui-widget-overlay{background: rgba(0,0,0,0.7);}
     </style>
+     @yield('page-styles')
      <style type="text/css">
      .picker{
         position: relative;
