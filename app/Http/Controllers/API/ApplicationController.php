@@ -10,7 +10,11 @@ use App\Region;
 use Illuminate\Support\Facades\Validator;
 
 use File;
+use Auth;
+
 use Faker\Provider\Image;
+use App\Notifications\SMSNotification;
+use App\MyPushNotification;
 
 
 class ApplicationController extends Controller
@@ -58,8 +62,9 @@ class ApplicationController extends Controller
         $dob = date('Y-m-d',$timestamp);
 
     
-
+        $currentUser = auth('api')->user();
     //    return $dob;
+
 
 
 
@@ -69,12 +74,12 @@ class ApplicationController extends Controller
         $applicant->phoneno = $r->phoneno;
         $applicant->image = $png_url;
         $applicant->gender = $r->gender;
-        $applicant->marital_status = $r->marital_status;
+        $applicant->marital_status = $r->maritalstatus;
         $applicant->idtype = $r->idtype;
         $applicant->idnumber = $r->idnumber;
         $applicant->dob = date('Y-m-d',$timestamp);
         $applicant->gfdmember = $r->gfdmember;
-        $applicant->disabilitytype = $r->disabilitytype;
+        $applicant->disabilitytype = json_encode($this->returndisabilitytypeArray($r->disabilitytype));
         $applicant->community = $r->communityname;
         $applicant->postal_address = $r->postaladdress;
         $applicant->houseno = $r->houseno;
@@ -82,19 +87,25 @@ class ApplicationController extends Controller
         $applicant->business_location = $r->business_location;
         $applicant->education = $r->education;
         $applicant->occupation = $r->occupation;
-        $applicant->yearsinobusines = $r->yearsinobusines;
+        $applicant->yearsinobusines = $r->yearsinbusiness;
         $applicant->dependants = $r->dependants;
-        $applicant->objective = json_encode($r->objective);
+        $applicant->objective = json_encode($this->returnReasonForFundArray($r->objective));
         $applicant->intentoffund = $r->fundintents;
         $applicant->total_amount = $r->totalamount;
         $applicant->groupapplication = $r->groupapplication;
-        $applicant->breakdown = $r->budgets;
+        $applicant->breakdown = json_encode($r->budgets);
         $applicant->info_approval = $r->info_approval;
         $applicant->region = $r->region;
         $applicant->district = $r->district;
         $applicant->approved = false;
 
+
+        $applicant->user_id = $currentUser->id;
+
         if($applicant->save()){
+            // $phoneno = substr($r->phoneno, -9);
+            // $message ='Hello '.$applicant->firstname.', Your application has been received. Pending approval from management. You will be notified once its approved';
+            // $applicant->notify(new SMSNotification($applicant,'233'.$phoneno, $message));
             return response()->json([
                 'success' => true,
                 'message' =>"Application Successfully sent",
@@ -105,10 +116,32 @@ class ApplicationController extends Controller
         }else{
             return response()->json([
                 'success' => false,
-                'message' =>"Noooooooo Application Successfully sent",
+                'message' =>"Oops Something went wrong. Please try again",
             ]);
         }
     }
+
+    public function returndisabilitytypeArray($array)
+    {
+        $reason = [];
+        foreach($array as $r){
+            array_push($reason, $r);
+        }
+       
+        return $reason;
+    }
+
+    public function returnReasonForFundArray($array)
+    {
+        $reasona = [];
+        foreach($array as $r){
+            array_push($reasona, $r);
+        }
+        return $reasona;
+    }
+
+
+    
 
 
     public function regions(){
@@ -122,6 +155,49 @@ class ApplicationController extends Controller
         $districts = District::where('region_id', $regionid)->get();
         return response()->json([
             'districts' => $districts
+        ]);
+    }
+
+    public function myApplications(){
+        $user = Auth::guard('api')->user();
+
+        $applications = Applicant::where('user_id', $user->id)->get();
+        return response()->json([
+            'applications'=> $applications
+        ]);
+    }
+
+    public function deleteApplication(Request $r){
+          $authuser = auth('api')->user();
+          $applicantion = Applicant::where('user_id', $authuser->id)->where('id', $r->applicant_id)->get();
+          if($applicantion != null){
+              $applicantion->delete();
+              return response()->json([
+                'status'=> 'success',
+                'message' => 'Application has been successully deleted'
+            ]);
+          }else{
+            return response()->json([
+                'status'=> 'error',
+                'message' => 'Ooops Something went wrong. Please try again'
+            ]);
+          }
+    }
+
+    public function totalApplication(){
+        $authuser = auth('api')->user();
+        $applicantionCount = Applicant::where('user_id', $authuser->id)->count();
+        return response()->json([
+            'totalapplication' => $applicantionCount.''
+        ]);
+    }
+
+    public function getNotifications(){
+        $authuser = auth('api')->user();
+        $pushnotes = MyPushNotification::where('user_id', $authuser->id)->get();
+
+        return response()->json([
+            'pushnotifications'=>$pushnotes
         ]);
     }
 }

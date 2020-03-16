@@ -34,4 +34,14 @@ return [
         'secret' => env('SPARKPOST_SECRET'),
     ],
 
+    'fcm' => [
+        'key' => env('AIzaSyBlte9VJqatcEhlcLBISFvoPIxOwYHfM7M')
+    ],
+
+    'nexmo' => [
+        'key' => 'f3064dde',
+        'secret' => 'e2af3a63a85a05e9',
+        'sms_from' => '233204052513',
+    ],
+
 ];

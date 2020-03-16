@@ -17,6 +17,10 @@ class RoleTableSeeder extends Seeder
         $perm1 = Permission::create(['guard_name' => 'admin', 'name' => 'Super Admin']);
         $role1->givePermissionTo($perm1);
 
+        $role6 = Role::create(['name' => 'District Supervisor', 'guard_name'=>'admin']);
+        $perm6 = Permission::create(['guard_name' => 'admin', 'name' => 'District Supervisor']);
+        $role6->givePermissionTo($perm6);
+
         $role2 = Role::create(['name' => 'Finance Officer', 'guard_name'=>'admin']);
         $perm2 = Permission::create(['guard_name' => 'admin', 'name' => 'Finance Officer']);
         $role2->givePermissionTo($perm2);
@@ -36,6 +40,15 @@ class RoleTableSeeder extends Seeder
         $role1->givePermissionTo($perm2);
         $role1->givePermissionTo($perm3);
         $role1->givePermissionTo($perm4);
+        $role1->givePermissionTo($perm5);
+        $role1->givePermissionTo($perm6);
+
+        ////give all access to district supervisor
+        $role6->givePermissionTo($perm2);
+        $role6->givePermissionTo($perm3);
+        $role6->givePermissionTo($perm4);
+        $role6->givePermissionTo($perm5);
+
 
 
     }

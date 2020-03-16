@@ -37,6 +37,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        
         parent::report($exception);
     }
 
@@ -49,14 +50,23 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        //     // if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
-        //     //     return \Response::view('errors.403',array(),403);
-        //     // }
-        //     if ($exception instanceof TokenMismatchException){
-        //         // Redirect to a form. Here is an example of how I handle mine
-        //         Session::flash('error','Your Session has expired. Please login again');
-        //         return  redirect()->to('/login');
+        // if ($exception instanceof TokenMismatchException){
+        //     // Redirect to a form. Here is an example of how I handle mine
+        //     Session::flash('error','Your Session has expired. Please login again');
+        //     return  redirect()->to('/login');
+        // }
+
+        if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
+            // return response()->json([
+            //     'responseMessage' => 'You do not have the required authorization.',
+            //     'responseStatus'  => 403,
+            // ]);
+            return  redirect()->to('/login');
+        }
+        //     if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
+        //         return \Response::view('errors.403',array(),403);
         //     }
+            
         //    if ($this->isHttpException($exception)) {
          
         //     if($exception instanceof MethodNotAllowedHttpException)

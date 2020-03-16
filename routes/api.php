@@ -19,18 +19,23 @@ use Illuminate\Http\Request;
 
 Route::post('login', 'API\AuthController@login');
 Route::post('register', 'API\AuthController@register');
+Route::post('/forgot-password','API\AuthController@forgotPassword');
+Route::post('/reset-password', 'API\AuthController@resetPassword');
  
-Route::post('apply', 'API\ApplicationController@apply');
+// Route::post('apply', 'API\ApplicationController@apply');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('me', 'API\AuthController@getAuthUser');
     Route::get('logout', 'API\AuthController@logout');
     Route::get('regions', 'API\ApplicationController@regions');
     Route::get('districts', 'API\ApplicationController@districts');
-
-
+    Route::get('my-applications', 'API\ApplicationController@myApplications');
+    Route::get('/total-applications', 'API\ApplicationController@totalApplication');
+    Route::get('/notifications', 'API\ApplicationController@getNotifications');
 
     // Route::post('apply', 'API\ApplicationController@apply');
+    Route::post('apply', 'API\ApplicationController@apply');
+    Route::get('delete-application', 'API\ApplicationController@deleteApplication');
 
  
 });

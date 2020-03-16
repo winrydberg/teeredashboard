@@ -60,7 +60,7 @@
                             <i class="ft-x"></i> CANCEL
                         </button>
                         <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-check-square-o"></i> ADD ADMIN
+                            <i class="fa fa-check-square-o"></i> ADD DISTRICT
                         </button>
                     </div>
                 </form>

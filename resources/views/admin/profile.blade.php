@@ -130,7 +130,7 @@
                                         </div>
                     
                                         <div class="form-actions">
-                                            <button type="button" class="btn btn-primary">
+                                            <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary">
                                                 <i class="fa fa-check-square-o"></i> CHANGE PASSWORD
                                             </button>
                                         </div>
@@ -146,6 +146,43 @@
     </div>
 {{-- </div> --}}
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                <form id="changePasswordForm">
+                    {{csrf_field()}}
+                <div class="form-group">
+                          <label for="exampleInputEmail1">Old Password</label>
+                          <input type="text" class="form-control" id="oldpassword" name="oldpassword" placeholder="Enter Old Password">   
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">New Password</label>
+                            <input type="text" class="form-control" id="password" name="newpassword" placeholder="Enter New Password">   
+                          </div>
+
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Confirm New Password</label>
+                            <input type="text" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Repeat Password">   
+                          </div>
+                        
+
+                        <button type="submit" class="btn btn-primary">CHANGE PASSWORD</button>
+                      </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 @stop
 
 
@@ -155,6 +192,7 @@
 @section('scripts-below')
 <script src="{{asset('assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/js/scripts/forms/select/form-select2.js')}}"></script>
+<script src="{{asset('assets/vendors/js/extensions/sweetalert.min.js')}}" type="text/javascript"></script>
 
 {{-- <script src="{{asset('assets/js/scripts/charts/echarts/bar-column/stacked-column.js')}}"></script>
 <script src="{{asset('assets/js/scripts/charts/echarts/radar-chord/non-ribbon-chord.js')}}"></script>
@@ -163,6 +201,64 @@
 <script src="{{asset('assets/js/scripts/pages/timeline.js')}}">
 </script> --}}
 <script>
-
+     $("#changePasswordForm").submit(function(event){
+        event.preventDefault();
+        swal({
+            title: "Change Password",
+            text: "Are you sure you want to Change Password?",
+            icon: "info",
+            showCancelButton: true,
+            buttons: {
+                cancel: {
+                    text: "No Cancel",
+                    value: null,
+                    visible: true,
+                    className: "btn-danger",
+                    closeModal: false,
+                },
+                confirm: {
+                    text: "Yes, Change Password",
+                    value: true,
+                    visible: true,
+                    className: "btn-success",
+                    closeModal: false
+                }
+            }
+        }).then(isConfirm => {
+            if (isConfirm) {
+                var data = $(this).serialize();
+                $.ajax({
+                   url: "{{url('/change-password')}}",
+                   method: 'POST',
+                   data: new FormData($("#changePasswordForm")[0]),
+                   contentType: false,
+                   processData: false,
+                   success: function(response){
+                       console.log(response);
+                          if(response.status =='success'){
+                            swal("Success", response.message, "success");
+                            setTimeout(function(){
+                                location.reload()
+                            }, 1500)
+                          }else if(response.status=='notloggedin'){
+                            window.location.href='/login';
+                          }else if(response.status=='error'){
+                            swal("Error", response.message, "error");
+                          }else{
+                            swal("Error",'Oops Something Went Wrong. Please try again', "error");
+                          }
+                   },
+                   error: function(error){
+                        alert('Oops Something went wrong. Please try again');
+                        console.log(error)
+                   }
+               })
+            }else {
+                swal("Error", "Action cancelled. Applicant not approved by you yet", "error");
+            }
+        });
+        
+        
+     })
 </script>
 @stop

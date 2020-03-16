@@ -58,7 +58,7 @@
                                      <i class="fa fa-remove"></i>
                                      DELETE</button>
                                  @endif
-                                 <a href="{{url('admins/'.$a->id)}}" class="btn btn-sm btn-primary">View Details</a>
+                                 <a href="{{url('admins/'.$a->id)}}" class="btn btn-sm btn-primary">VIEW DETAILS</a>
                             </td>
                             </tr>
                             @endforeach

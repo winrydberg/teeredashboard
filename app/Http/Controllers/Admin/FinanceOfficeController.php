@@ -17,9 +17,10 @@ use Auth;
 class FinanceOfficeController extends Controller
 {
     public function disburseInfo($id){
-        $appid = substr($id, -1);
+        //$appid = substr($id, -1);
+        $appid = explode('00', $id);
          if($appid != null){
-                $applicant = Applicant::find($appid);
+                $applicant = Applicant::find($appid[1]);
                 return view('admin.disbursementinfo', compact('applicant'));
          }else{
              return back();
@@ -30,14 +31,30 @@ class FinanceOfficeController extends Controller
     public function disbursements(Request $r){
         $start  = request()->query('start');
         $end  = request()->query('end');
-        if($start != null && $end != null){
-            $disbursements = Disbursement::whereBetween('created_at', [$start, $end])->where('district_id', Auth::guard('admin')->user()->district_id)->get();
-            return view('admin.disbursements', compact('disbursements'));
+        
+        $authuser = Auth::guard('admin')->user();
+
+        if($authuser->hasRole('Super Admin')){
+            if($start != null && $end != null){
+                $disbursements = Disbursement::whereBetween('created_at', [$start, $end])->get();
+                return view('admin.disbursements', compact('disbursements'));
+            }else{
+            
+                $disbursements = [];
+                return view('admin.disbursements', compact('disbursements'));
+            }
         }else{
-            return view('admin.disbursements');
+            if($start != null && $end != null){
+                $disbursements = Disbursement::whereBetween('created_at', [$start, $end])->where('district_id', Auth::guard('admin')->user()->district_id)->get();
+                return view('admin.disbursements', compact('disbursements'));
+            }else{
+            
+                $disbursements = [];
+                return view('admin.disbursements', compact('disbursements'));
+            }
         }
-        //if()
-       // dd($end);
+        
+   
 
        
     }
@@ -48,9 +65,12 @@ class FinanceOfficeController extends Controller
             $district = District::where('id', $r->district_id)->first();
             $extension = File::extension($r->file('image')->getClientOriginalName());
             $fileName = $r->file('image')->getClientOriginalName();
-            if ($extension == "jpg" || $extension == "png") {
-                $r->file('image')->move('assets/images/disbursements/'.$district->name,$fileName);
-            }
+            // if ($extension == "jpg" || $extension == "png") {
+            $r->file('image')->move('assets/images/disbursements/'.$district->name,$fileName);
+            // }
+
+            $applicant = Applicant::where('id', $r->applicant_id)->first();
+            $applicant->fundreleased = true;
            
             $disbursement = new Disbursement();
            $disbursement->amount = $r->amount;
@@ -61,7 +81,7 @@ class FinanceOfficeController extends Controller
            $disbursement->district_id = $r->district_id;
            $disbursement->admin_id = $r->admin_id;
 
-            if( $disbursement->save()){
+            if( $disbursement->save() && $applicant->save()){
               Session::flash('success','Disbursement Information saved successfully');
             }else{
               Session::flash('error','oops Something went wrong. Please try again');

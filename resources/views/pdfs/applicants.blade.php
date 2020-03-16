@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">  --}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> 
     <style>
         body {
             /* position: fixed; */
@@ -57,13 +57,15 @@
     </div> --}}
     {{-- <div class="row"> --}}
 
-     <div class="imagehead">
+     {{-- <div class="imagehead col-md-offset-3">
             <img  style="height: 100px; width: 110px;" src="{{asset('assets/images/ghana.png')}}"/>
      </div>
-     <br/>
+     <br/> --}}
+
+    
     <div class="heading">
        
-        <h4 align="center">BOLGATANGA MUNICIPAL ASSEMBLY</h4>
+        <h4 align="center" style="text-transform:uppercase;">{{$applicant->district}} ASSEMBLY</h4>
         <h4 align="center">DISTRICT ASSSEMBLY COMMON FUND FOR PERSONS LIVING WITH DISABILITY</h4>
     </div>
     {{-- </div> --}}
@@ -203,13 +205,65 @@
         {{-- <hr> --}}
     </div>
 
+    <div class="table-responsive">
+        <table id="recent-orders" class="table table-bordered table-hover mb-0 ps-container ps-theme-default">
+            <thead>
+                <tr>
+                    <th>ITEM</th>
+                    <th>QUANTITY</th>
+                    <th>UNIT COST</th>
+                    <th>TOTAL EST. COST</th>
+                </tr>
+            </thead>
+
+            <?php 
+               $total = 0;
+               $breakdowns = json_decode($applicant->breakdown);
+            ?>
+            <tbody>
+                @foreach($breakdowns as $a)
+                <?php $total += (int)$a->totalcost?>
+                <tr>
+                <td class="text-truncate">{{$a->item}}</td>
+                <td class="text-truncate">{{$a->qty}}</td>
+                <td class="text-truncate">GHC {{$a->unitcost}}</td>
+                <td class="text-truncate">GHC {{$a->totalcost}}</td>
+                
+                </tr>                          
+                @endforeach
+                <tr>
+                    <td class="text-truncate"><strong>TOTAL</strong></td>
+                    <td class="text-truncate"></td>
+                    <td class="text-truncate"></td>
+                    <td class="text-truncate"><strong>GHC {{$total}}</strong></td>
+                    
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+
     <br />
     <legend>APPROVAL OFFICERS</legend>
     <hr />
     <div class="testcon" >
-            <p><strong>Official #1: </strong><span style="text-transform:uppercase">{{$admins[0] != null?$admins[0]->name:'NOT APPROVED'}}</span></p>
-            <p><strong>Official #2: </strong><span style="text-transform:uppercase">{{$admins[1] != null?$admins[1]->name:'NOT APPROVED'}}</span></p>
-            <p><strong>Official #3: </strong><span style="text-transform:uppercase">{{$admins[2] != null?$admins[2]->name:'NOT APPROVED'}}</span></p>
+        @if($admins[0] == null)
+        <p><strong>Official #1:
+            {{-- <button class="" type="submit">
+                <i class="fas fa-check-circle"></i>
+            </button>  --}}
+            </strong><span style="text-transform:uppercase">NOT APPROVED</span></p>
+        @else
+        <p><strong>Official #1:
+            {{-- <button class="" style="background-color: green;" type="submit">
+                <i class="fas fa-check-circle"></i>
+            </button> --}}
+        </strong><span style="text-transform:uppercase">
+            {{$admins[0]->name}}</span></p>
+       
+        @endif
+           
+            {{-- <p><strong>Official #2: </strong><span style="text-transform:uppercase">{{$admins[1] != null?$admins[1]->name:'NOT APPROVED'}}</span></p>
+            <p><strong>Official #3: </strong><span style="text-transform:uppercase">{{$admins[2] != null?$admins[2]->name:'NOT APPROVED'}}</span></p> --}}
         </div>
 
 

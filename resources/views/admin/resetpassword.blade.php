@@ -86,6 +86,10 @@ height: auto;
                                       @if(Session::has('error'))
                                     <p class="alert alert-danger">{{Session::get('error')}}</p>
                                       @endif
+
+                                      @if(Session::has('success'))
+                                    <p class="alert alert-success">{{Session::get('success')}}</p>
+                                      @endif
                                     <form class="form-horizontal form-simple" method="POST" action="{{url('/reset-password')}}">
                                              {{csrf_field()}}   
                                              <fieldset class="form-group position-relative has-icon-left">

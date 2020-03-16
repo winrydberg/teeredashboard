@@ -1,4 +1,8 @@
 @extends('admin.layout.base')
+@section('page-styles')
+<link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/css/tables/datatable/datatables.min.css')}}">
+
+@stop
 @section('content')
 <div class="row">
         <div class="col-xl-12 col-lg-12 col-12">
@@ -45,7 +49,7 @@
         <div class="card-content">
             @if(count($applicants)>0)
             <div class="table-responsive">
-                <table id="recent-orders" class="table table-hover mb-0 ps-container ps-theme-default">
+                <table id="myTable" class="table table-hover mb-0 ps-container ps-theme-default">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -95,4 +99,16 @@
 </div>
 @endif
 
+@stop
+
+@section('scripts-below')
+<script src="{{asset('assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
+<script src="{{asset('assets/js/scripts/tables/datatables/datatable-basic.js')}}"></script>
+<script>
+    $.noConflict();
+    jQuery( document ).ready(function( $ ) {
+        $('#myTable').DataTable();
+    });
+    // Code that uses other library's $ can follow here.
+    </script>
 @stop

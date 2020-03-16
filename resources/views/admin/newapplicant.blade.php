@@ -24,7 +24,8 @@
                 </div>
                 <div class="card-content collapse show">
                     <div class="card-body">
-                        <form id="applicantForm" action="#" class="steps-validation wizard-circle" method="POst" enctype="multipart/form-data">
+                        <form id="applicantForm" action="#" class="steps-validation wizard-circle" method="POst"
+                            enctype="multipart/form-data">
                             {{csrf_field()}}
                             <h6>Step 1</h6>
                             <fieldset>
@@ -54,8 +55,7 @@
                                                 First Name :
                                                 <span class="danger">*</span>
                                             </label>
-                                            <input type="text" class="form-control " id="firstName3"
-                                                name="firstname">
+                                            <input type="text" class="form-control " id="firstName3" name="firstname">
                                         </div>
                                     </div>
 
@@ -65,8 +65,7 @@
                                                 Last Name :
                                                 <span class="danger">*</span>
                                             </label>
-                                            <input type="text" class="form-control " id="lastName3"
-                                                name="lastname">
+                                            <input type="text" class="form-control " id="lastName3" name="lastname">
                                         </div>
                                     </div>
                                 </div>
@@ -88,8 +87,7 @@
                                                 Select City :
                                                 <span class="danger">*</span>
                                             </label>
-                                            <select class="custom-select form-control " id="gender"
-                                                name="gender">
+                                            <select class="custom-select form-control " id="gender" name="gender">
                                                 <option value="">Select Gender</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
@@ -122,8 +120,7 @@
                                                 ID Type :
                                                 <span class="danger">*</span>
                                             </label>
-                                            <select class="custom-select form-control " id="idtype"
-                                                name="idtype">
+                                            <select class="custom-select form-control " id="idtype" name="idtype">
                                                 <option value="">Select ID Type</option>
                                                 <option value="Voter ID">Voter ID</option>
                                                 <option value="Driver License">Driver License</option>
@@ -166,8 +163,7 @@
                                                 Are You GFD Member :
                                                 <span class="danger">*</span>
                                             </label>
-                                            <select class="custom-select form-control " id="idtype"
-                                                name="gfdmember">
+                                            <select class="custom-select form-control " id="idtype" name="gfdmember">
                                                 <option value="">GFD Member?</option>
                                                 <option value="Yes">Yes</option>
                                                 <option value="No">No</option>
@@ -175,25 +171,26 @@
                                         </div>
                                     </div>
                                 </div>
-                              
+
                                 <div class="row">
-                                        <legend>Applicant Account Info</legend>
-                                        <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="location"> Password :
-                                                        <span class="danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="form-control" id="password" name="password">
-                                                </div>
+                                    <legend>Applicant Account Info</legend>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="location"> Password :
+                                                <span class="danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" id="password" name="password">
                                         </div>
-                                        <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="location">Repeat Password :
-                                                        <span class="danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="form-control" id="confirmpassword" name="confirmpassword">
-                                                </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="location">Repeat Password :
+                                                <span class="danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" id="confirmpassword"
+                                                name="confirmpassword">
                                         </div>
+                                    </div>
                                 </div>
                             </fieldset>
 
@@ -207,32 +204,27 @@
                                             <label>Diability Type :</label>
                                             <div class="c-inputs-stacked">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="vision"
-                                                         id="item21">
+                                                    <input type="checkbox" name="vision" id="item21">
                                                     <label class="custom-control-label" for="item21">Visually
                                                         Impaired</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox"  name="hearing"
-                                                         id="item22">
+                                                    <input type="checkbox" name="hearing" id="item22">
                                                     <label class="custom-control-label" for="item22">Hearing
                                                         Impaired</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="physic"
-                                                         id="item23">
+                                                    <input type="checkbox" name="physic" id="item23">
                                                     <label class="custom-control-label" for="item23">Physically
                                                         Disabled</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="mental"
-                                                         id="item24">
+                                                    <input type="checkbox" name="mental" id="item24">
                                                     <label class="custom-control-label"
                                                         for="item24">Mental/Intellectual</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="albinos"
-                                                         id="item25">
+                                                    <input type="checkbox" name="albinos" id="item25">
                                                     <label class="custom-control-label" for="item25">Albino</label>
                                                 </div>
                                             </div>
@@ -281,8 +273,7 @@
                                                 House no :
                                                 <span class="danger">*</span>
                                             </label>
-                                            <input type="text" class="form-control" id="postaladdress"
-                                                name="houseno">
+                                            <input type="text" class="form-control" id="postaladdress" name="houseno">
                                         </div>
                                         <div class="form-group">
                                             <label for="eventName3">
@@ -296,7 +287,8 @@
                                                 Business Location :
                                                 <span class="danger">*</span>
                                             </label>
-                                            <input type="text" class="form-control" id="bislocation" name="business_location">
+                                            <input type="text" class="form-control" id="bislocation"
+                                                name="business_location">
                                         </div>
                                     </div>
                                 </div>
@@ -312,8 +304,7 @@
                                                 Education :
                                                 <span class="danger">*</span>
                                             </label>
-                                            <select class="custom-select form-control " id="idtype"
-                                                name="education">
+                                            <select class="custom-select form-control " id="idtype" name="education">
                                                 <option value="">Select Education</option>
                                                 <option value="None">None</option>
                                                 <option value="Basic">Basic</option>
@@ -374,32 +365,27 @@
                                                 undertake? :</label>
                                             <div class="c-inputs-stacked">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="income"
-                                                        id="item21">
+                                                    <input type="checkbox" name="income" id="item21">
                                                     <label class="custom-control-label" for="item21">Income
                                                         Generation</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="educational"
-                                                        id="item22">
+                                                    <input type="checkbox" name="educational" id="item22">
                                                     <label class="custom-control-label" for="item22">Educational
                                                         Support</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="organization"
-                                                        id="item23">
+                                                    <input type="checkbox" name="organization" id="item23">
                                                     <label class="custom-control-label" for="item23">Organizational
                                                         development</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="medical"
-                                                        id="item24">
+                                                    <input type="checkbox" name="medical" id="item24">
                                                     <label class="custom-control-label" for="item24">Medical/Assistive
                                                         devices</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="skillsdev" 
-                                                        id="item25">
+                                                    <input type="checkbox" name="skillsdev" id="item25">
                                                     <label class="custom-control-label" for="item25">Skills
                                                         training/apprenticeship</label>
                                                 </div>
@@ -438,48 +424,101 @@
 
                             <h6>Step 8</h6>
                             <fieldset>
-                                    <div class="row">
-                                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="emailAddress5">
+                                                Total Amount Requested :(GHC)
+                                                <span class="danger">*</span>
+                                            </label>
+                                            <input type="number" class="form-control" id="amount" name="amount">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="emailAddress5">
+                                                Budget Breakdown :
+                                                <span class="danger">*</span>
+                                            </label>
+                                            <textarea class="form-control" name="budgets"
+                                                placeholder="Budget Breakdown "></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="bbreakdown">
+                                    <div class="col-md-12">
+
+                                        <div class="form-body">
+                                            <h4 class="form-section"><i class="ft-user"></i> Breakdown Details</h4>
+                                            <p>Indicate actual amount spent in each category</p>
+                                            <div class="row" id="klon1">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="emailAddress5">
-                                                           Total Amount Requested :(GHC)
-                                                            <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="number" class="form-control" id="amount" name="amount">
+                                                        <label for="projectinput2">Item</label>
+                                                        <input type="text" id="projectinput2" 
+                                                            class="form-control" placeholder="Item Name" name="item[]">
                                                     </div>
                                                 </div>
-                                            <div class="col-md-6">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="emailAddress5">
-                                                               Budget Breakdown :
-                                                            <span class="danger">*</span>
-                                                        </label>
-                                                       <textarea class="form-control" name="budgets" placeholder="Budget Breakdown "></textarea>
+                                                        <label for="projectinput2">Quantity</label>
+                                                        <input type="number" id="projectinput2" 
+                                                            class="form-control" name="qty[]">
                                                     </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="projectinput2">Unit Cost</label>
+                                                        <input type="text" id="projectinput2" 
+                                                            class="form-control" name="unitcost[]">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="projectinput4">Tota Est. Cost(GHC)</label>
+                                                        <input type="text" id="projectinput4" 
+                                                            class="form-control" name="totalcost[]">
+                                                    </div>
+                                                </div>
                                             </div>
-                                    </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <button id="cloneDiv" type="button" style="margin-bottom:10px;"
+                                                        class="btn btn-info"> <i class="fa fa-plus"></i> ADD
+                                                        NEW</button>
+                                                    <button id="removeInput" type="button" style="margin-bottom:10px;"
+                                                        class="btn btn-danger"> <i class="fa fa-remove"></i>
+                                                        REMOVE</button>
 
-                                    <div class="row">
-                                            <div class="col-md-6">
-
-                                                    <div class="form-group">
-                                                        <label>Disclosure Statement by Applicant:</label>
-                                                        <div class="c-inputs-stacked">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="radio" name="agree" value="1"
-                                                                    id="item21">
-                                                                <label class="custom-control-label" for="item21">I Agree</label>
-                                                            </div>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="radio" name="agree" 
-                                                                    id="item22" value="0">
-                                                                <label class="custom-control-label" for="item22">I Disagree</label>
-                                                            </div>
-                                                          
-                                                        </div>
-                                                    </div>
                                                 </div>
+                                            </div>
+                                        </div>
+
                                     </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label>Disclosure Statement by Applicant:</label>
+                                            <div class="c-inputs-stacked">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="radio" name="agree" value="1" id="item21">
+                                                    <label class="custom-control-label" for="item21">I Agree</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="radio" name="agree" id="item22" value="0">
+                                                    <label class="custom-control-label" for="item22">I Disagree</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </fieldset>
                         </form>
                     </div>
@@ -494,152 +533,165 @@
 
 <!-- Modal -->
 <div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
-        <div class="modal-dialog modal-sm" role="document">
-          <div class="modal-content">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
             <div class="modal-body text-center">
-              <div class="loader"></div>
-              <div clas="loader-txt">
-                <p>Sending Application. <br><br><small>Please Wait...</small></p>
-              </div>
+                <div class="loader"></div>
+                <div clas="loader-txt">
+                    <p>Sending Application. <br><br><small>Please Wait...</small></p>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
 
-      <style>
-      @import url(https://fonts.googleapis.com/css?family=Roboto:300,400);
-body {
-  height: 100%;
-  padding: 0px;
-  margin: 0px;
-  background: #333;
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 1em;
-}
-h1{
-  font-family: 'Roboto', sans-serif;
-  font-size: 30px;
-  color: #999;
-  font-weight: 300;
-  margin-bottom: 55px;
-  margin-top: 45px;
-  text-transform: uppercase;
-}
-h1 small{
-  display: block;
-  font-size: 18px;
-  text-transform: none;
-  letter-spacing: 1.5px;
-  margin-top: 12px;
-}
-.row{
-  max-width: 950px;
-  margin: 0 auto;
-}
-.btn{
-  white-space: normal;
-}
-.button-wrap {
-  position: relative;
-  text-align: center;
-  .btn {
-    font-family: 'Roboto', sans-serif;
-    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.5);
-    border-radius: 0px;
-    border-color: #222;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-size: 1.1em;
-    font-weight: 400;
-    letter-spacing: 1px;
-    small {
-      font-size: 0.8rem;
-      letter-spacing: normal;
-      text-transform: none;
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:300,400);
+
+    body {
+        height: 100%;
+        padding: 0px;
+        margin: 0px;
+        background: #333;
+        font-family: 'Roboto', sans-serif !important;
+        font-size: 1em;
     }
-  }
-}
 
-
-/** SPINNER CREATION **/
-
-.loader {
-  position: relative;
-  text-align: center;
-  margin: 15px auto 35px auto;
-  z-index: 9999;
-  display: block;
-  width: 80px;
-  height: 80px;
-  border: 10px solid rgba(0, 0, 0, .3);
-  border-radius: 50%;
-  border-top-color: #000;
-  animation: spin 1s ease-in-out infinite;
-  -webkit-animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-  to {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes spin {
-  to {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-
-/** MODAL STYLING **/
-
-.modal-content {
-  border-radius: 0px;
-  box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.7);
-}
-
-.modal-backdrop.show {
-  opacity: 0.75;
-}
-
-.loader-txt {
-  p {
-    font-size: 13px;
-    color: #666;
-    small {
-      font-size: 11.5px;
-      color: #999;
+    h1 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 30px;
+        color: #999;
+        font-weight: 300;
+        margin-bottom: 55px;
+        margin-top: 45px;
+        text-transform: uppercase;
     }
-  }
-}
 
-#output {
-  padding: 25px 15px;
-  background: #222;
-  border: 1px solid #222;
-  max-width: 350px;
-  margin: 35px auto;
-  font-family: 'Roboto', sans-serif !important;
-  p.subtle {
-    color: #555;
-    font-style: italic;
-    font-family: 'Roboto', sans-serif !important;
-  }
-  h4 {
-    font-weight: 300 !important;
-    font-size: 1.1em;
-    font-family: 'Roboto', sans-serif !important;
-  }
-  p {
-    font-family: 'Roboto', sans-serif !important;
-    font-size: 0.9em;
-    b {
-      text-transform: uppercase;
-      text-decoration: underline;
+    h1 small {
+        display: block;
+        font-size: 18px;
+        text-transform: none;
+        letter-spacing: 1.5px;
+        margin-top: 12px;
     }
-  }
-}
-      </style>
+
+    .row {
+        max-width: 950px;
+        margin: 0 auto;
+    }
+
+    .btn {
+        white-space: normal;
+    }
+
+    .button-wrap {
+        position: relative;
+        text-align: center;
+
+        .btn {
+            font-family: 'Roboto', sans-serif;
+            box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.5);
+            border-radius: 0px;
+            border-color: #222;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 1.1em;
+            font-weight: 400;
+            letter-spacing: 1px;
+
+            small {
+                font-size: 0.8rem;
+                letter-spacing: normal;
+                text-transform: none;
+            }
+        }
+    }
+
+
+    /** SPINNER CREATION **/
+
+    .loader {
+        position: relative;
+        text-align: center;
+        margin: 15px auto 35px auto;
+        z-index: 9999;
+        display: block;
+        width: 80px;
+        height: 80px;
+        border: 10px solid rgba(0, 0, 0, .3);
+        border-radius: 50%;
+        border-top-color: #000;
+        animation: spin 1s ease-in-out infinite;
+        -webkit-animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+        to {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @-webkit-keyframes spin {
+        to {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+
+    /** MODAL STYLING **/
+
+    .modal-content {
+        border-radius: 0px;
+        box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-backdrop.show {
+        opacity: 0.75;
+    }
+
+    .loader-txt {
+        p {
+            font-size: 13px;
+            color: #666;
+
+            small {
+                font-size: 11.5px;
+                color: #999;
+            }
+        }
+    }
+
+    #output {
+        padding: 25px 15px;
+        background: #222;
+        border: 1px solid #222;
+        max-width: 350px;
+        margin: 35px auto;
+        font-family: 'Roboto', sans-serif !important;
+
+        p.subtle {
+            color: #555;
+            font-style: italic;
+            font-family: 'Roboto', sans-serif !important;
+        }
+
+        h4 {
+            font-weight: 300 !important;
+            font-size: 1.1em;
+            font-family: 'Roboto', sans-serif !important;
+        }
+
+        p {
+            font-family: 'Roboto', sans-serif !important;
+            font-size: 0.9em;
+
+            b {
+                text-transform: uppercase;
+                text-decoration: underline;
+            }
+        }
+    }
+</style>
 
 
 @endsection
@@ -653,8 +705,7 @@ h1 small{
 {{-- <script src="{{asset('assets/js/scripts/forms/wizard-steps.js')}}"></script> --}}
 {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> --}}
 <script type="text/javascript">
-
-// Show form
+    // Show form
 var form = $(".steps-validation").show();
 
 $(".steps-validation").steps({
@@ -718,6 +769,7 @@ $(".steps-validation").steps({
             $("#loadMe").modal("hide");
             console.log(response)
             if(response.status =='success'){
+                console.log(response);
                 $("#loadMe").modal("hide");
                 swal("Success",response.message,'success'); 
                 setTimeout(function(){
@@ -765,7 +817,32 @@ $("#passport").change(function(){
 
 
 <script>
-// $(document).ready(function() {
+    $('#cloneDiv').click(function(){
+// get the last DIV which ID starts with ^= "klon"
+var $div = $('div[id^="klon"]:last');
+
+// Read the Number from that DIV's ID (i.e: 3 from "klon3")
+// And increment that number by 1
+var num = parseInt( $div.prop("id").match(/\d+/g), 10 ) +1;
+
+// Clone it and assign the new ID (i.e: from num 4 to ID "klon4")
+var $klon = $div.clone().prop('id', 'klon'+num );
+
+// Finally insert $klon wherever you want
+$div.after( $klon );
+
+});
+
+
+//remove input
+$('#removeInput').click(function(){
+     $('div[id^="klon"]:last').remove();
+})
+</script>
+
+
+<script>
+    // $(document).ready(function() {
 //   $("#just_load_please").on("click", function(e) {
 //     e.preventDefault();
 //     $("#loadMe").modal({

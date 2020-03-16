@@ -29,7 +29,7 @@ class CreateMonitorsTable extends Migration
             $table->string('streetname')->nullable();
             $table->string('postaladdress')->nullable();
             $table->string('phoneno')->nullable();
-            $table->text('activity_type');
+            $table->text('activity_type')->nullable();
             $table->text('activity_undertaken');
             $table->text('expenditure')->nullable();
             $table->boolean('made_gains')->default(false);

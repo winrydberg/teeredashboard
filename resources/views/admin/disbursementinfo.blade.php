@@ -38,30 +38,30 @@
                                        <input type="number" id="amount" style="display:none;" class="form-control" value="{{$applicant->id}}" name="applicant_id">
                                            
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="farmname">Amount Released</label>
+                                            <label class="col-md-3 label-control" for="farmname">Amount Released(GHC)</label>
                                             <div class="col-md-9">
-                                                <input type="number" id="amount" class="form-control" name="amount">
+                                            <input type="number" id="amount" readonly class="form-control" value="{{$applicant->approvedAmt}}" name="amount">
                                             </div>
                                         </div>
         
                                         <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="farmlocation">Date Released</label>
                                                 <div class="col-md-9">
-                                                    <input type="date" id="farmlocation" class="form-control" name="date">
+                                                <input type="date" id="farmlocation"  class="form-control" name="date">
                                                 </div>
                                         </div>
         
                                         <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="farmlocation">Receipient Bank Account</label>
+                                                <label class="col-md-3 label-control" for="farmlocation">Receipient Account</label>
                                                 <div class="col-md-9">
-                                                    <input type="text" id="farmlocation" class="form-control" name="accountno">
+                                                    <input type="text" required id="farmlocation" class="form-control" name="accountno">
                                                 </div>
                                         </div>
         
                                         <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="farmlocation">Scan Copy of Receipt</label>
                                                 <div class="col-md-9">
-                                                    <input type="file" id="farmlocation" class="form-control" name="image">
+                                                    <input type="file" required id="farmlocation" class="form-control" name="image">
                                                 </div>
                                         </div>
         

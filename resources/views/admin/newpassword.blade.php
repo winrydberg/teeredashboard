@@ -78,7 +78,7 @@ height: auto;
                                         <div><img src="{{asset('assets/images/user.png')}}" style="max-width:100px;border-radius:10px" alt="branding logo"></div>
                                     </div>
 
-                                    <h3 align="center" style="margin-top: 10px;">NEW PASSWORD</h3>
+                                    <h3 align="center" style="margin-top: 10px;">ENTER NEW PASSWORD</h3>
                                    
                                 </div>
                                 <div class="card-content">
@@ -86,7 +86,7 @@ height: auto;
                                       @if(Session::has('error'))
                                     <p class="alert alert-danger">{{Session::get('error')}}</p>
                                       @endif
-                                    <form class="form-horizontal form-simple" method="POST" action="{{url('/actor/reset-password')}}">
+                                    <form class="form-horizontal form-simple" method="POST" id="changePasswordForm">
                                              {{csrf_field()}}   
                                              <fieldset class="form-group position-relative has-icon-left">
                                                     <input type="password" name="newpassword" class="form-control form-control-lg input-lg" id="user-password" placeholder="New Password" required="">
@@ -101,11 +101,11 @@ height: auto;
                                                 </div>
                                             </fieldset>
 
-                                        <input type="text" hidden value="{{ app('request')->input('token') }}" name="token" class="form-control form-control-lg input-lg" id="token" placeholder="Confirm Password" required="">
-                                        <input type="text"  hidden value="{{ app('request')->input('uid') }}" name="bin" class="form-control form-control-lg input-lg" id="bin" placeholder="Confirm Password" required="">
+                                        <input type="text" hidden  value="{{ $token }}" name="token" class="form-control form-control-lg input-lg" id="token" placeholder="Confirm Password" required="">
+                                        <input type="text" hidden  value="{{ $id }}" name="id" class="form-control form-control-lg input-lg" id="bin" placeholder="Confirm Password" required="">
 
 
-                                            <button type="submit" class="btn btn-lg btn-block" style="background:black;color:white"><i class="ft-unlock"></i> Login</button>
+                                            <button type="submit" class="btn btn-lg btn-block" style="background:black;color:white"><i class="ft-unlock"></i> RESET PASSWORD</button>
                                         </form>
                                     </div>
                                 </div>
@@ -143,5 +143,69 @@ height: auto;
     <script type="text/javascript">
       // $('table, .datatables').DataTable();
     </script>
+    <script src="{{asset('assets/vendors/js/extensions/sweetalert.min.js')}}" type="text/javascript"></script>
+
+
+<script>
+  $("#changePasswordForm").submit(function(event){
+     event.preventDefault();
+     swal({
+         title: "Changing Password",
+         text: "",
+         icon: "info",
+         showCancelButton: true,
+         buttons: {
+             cancel: {
+                 text: "No Cancel",
+                 value: null,
+                 visible: true,
+                 className: "btn-danger",
+                 closeModal: false,
+             },
+             confirm: {
+                 text: "Reset Password",
+                 value: true,
+                 visible: true,
+                 className: "btn-success",
+                 closeModal: false
+             }
+         }
+     }).then(isConfirm => {
+         if (isConfirm) {
+             var data = $(this).serialize();
+             $.ajax({
+                url: "{{url('/save-new-password')}}",
+                method: 'POST',
+                data: new FormData($("#changePasswordForm")[0]),
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    console.log(response);
+                       if(response.status =='success'){
+                         swal("Success", response.message, "success");
+                         setTimeout(function(){
+                             window.location.href="{{url('/login')}}";
+                         }, 1500)
+                       }else if(response.status=='notloggedin'){
+                        window.location.href="{{url('/login')}}";
+                       }else if(response.status=='error'){
+                         swal("Error", response.message, "error");
+                       }else{
+                         swal("Error",'Oops Something Went Wrong. Please try again', "error");
+                       }
+                },
+                error: function(error){
+                     alert('Oops Something went wrong. Please try again');
+                     console.log(error)
+                }
+            })
+         }else {
+             swal("Error", "Action cancelled. Applicant not approved by you yet", "error");
+         }
+     });
+     
+     
+  })
+</script>
   </body>
 </html>

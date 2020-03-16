@@ -1,4 +1,8 @@
 @extends('admin.layout.base')
+@section('page-styles')
+<link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/css/tables/datatable/datatables.min.css')}}">
+
+@stop
 @section('content')
 
 
@@ -6,7 +10,7 @@
             <div class="col-xl-12 col-lg-12 col-12">
                     <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">SELECT PERIOD</h4>
+                                <h4 class="card-title">SELECT PERIOD OF DISBURSEMENT</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
@@ -49,6 +53,7 @@
             </div>
     </div>
 
+
 @if(isset($disbursements))
 <div class="row">
 		<div class="col-xl-12 col-lg-12">
@@ -64,7 +69,7 @@
             </div>
             <div class="card-content">
                 <div class="table-responsive">
-                    <table id="recent-orders" class="table table-hover mb-0 ps-container ps-theme-default">
+                    <table id="myTable" class="table table-responsive">
                         <thead>
                             <tr>
                                 {{-- <th>ID</th> --}}
@@ -86,15 +91,21 @@
                                     <td class="text-truncate">{{$d->account}}</td>
                                     <td class="text-truncate">{{date('d-m-Y', strtotime($d->release_date))}}</td>
                                     <td class="text-truncate">
-                                        <a href="#" class="btn btn-sm btn-danger">APPLICANT DETAILS</a>
-                                        <a href="#" class="btn btn-sm btn-success">SEND SMS</a>
-                                        <a href="#" class="btn btn-sm btn-warning">PRINT INFO</a>
+                                    <a href="{{url('/applicant-details/teere00'.$d->applicant->id)}}" class="btn btn-sm btn-danger">APPLICANT DETAILS</a>
+                                    
+                                    <?php
+                                    $district = App\District::where('id', Auth::guard('admin')->user()->district_id)->first();
+                                    $disbursement = App\Disbursement::where('applicant_id', $d->applicant->id)->first();
+                                    ?>
+                                    <a target="_blank" href="{{url('assets/images/disbursements/'.$district->name.'/'.$disbursement->scancopy)}}" class="btn btn-sm btn-success">VIEW RECEIPT</a>
+                                        {{-- <a href="#" class="btn btn-sm btn-warning">PRINT INFO</a> --}}
                                     </td>
                                     </tr>
                              @endforeach
 
                         </tbody>
                     </table>
+                    {{-- {{ $disbursements->links() }} --}}
                 </div>
             </div>
         </div>
@@ -104,3 +115,16 @@
 @endif
 
 @endsection
+
+
+@section('scripts-below')
+<script src="{{asset('assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
+<script src="{{asset('assets/js/scripts/tables/datatables/datatable-basic.js')}}"></script>
+<script>
+    $.noConflict();
+    jQuery( document ).ready(function( $ ) {
+        $('#myTable').DataTable();
+    });
+    // Code that uses other library's $ can follow here.
+    </script>
+@stop

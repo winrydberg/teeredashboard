@@ -320,6 +320,44 @@
                                                     <p style="text-transform:uppercase">
                                                         <strong>BUDGET BREAKDOWN: </strong> <span
                                                             style="margin-left:20px;">{{$applicant->budgets}}</span>
+                                                            <div class="table-responsive">
+                                                                <table id="recent-orders" class="table table-bordered table-hover mb-0 ps-container ps-theme-default">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>ITEM</th>
+                                                                            <th>QUANTITY</th>
+                                                                            <th>UNIT COST</th>
+                                                                            <th>TOTAL EST. COST</th>
+                                                                        </tr>
+                                                                    </thead>
+
+                                                                    <?php 
+                                                                       $total = 0;
+                                                                       $breakdowns = json_decode($applicant->breakdown);
+                                                                    ?>
+                                                                 
+                                                                    <tbody>
+                                                                        @foreach($breakdowns as $a)
+                                                                        <?php $total += (int)$a->totalcost?>
+                                                                        <tr>
+                                                                        <td class="text-truncate">{{$a->item}}</td>
+                                                                        <td class="text-truncate">{{$a->qty}}</td>
+                                                                        <td class="text-truncate">GHC {{$a->unitcost}}</td>
+                                                                        <td class="text-truncate">GHC {{$a->totalcost}}</td>
+                                                                        
+                                                                        </tr>                          
+                                                                        @endforeach
+                                                                        <tr>
+                                                                            <td class="text-truncate"><strong>TOTAL</strong></td>
+                                                                            <td class="text-truncate"></td>
+                                                                            <td class="text-truncate"></td>
+                                                                            <td class="text-truncate"><strong>GHC {{$total}}</strong></td>
+                                                                            
+                                                                            </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
                                                     </p>
                                                 </div>
                                             </div>
@@ -331,12 +369,12 @@
                         <hr>
                         <div class="row">
                                 <div class="col-md-12">
-                                    @role('Approval Officer|Super Admin')
-                                    @if($hasApproved == null)
+                                    @role('Approval Officer')
+                                    @if($applicant->approved == false)
                                         <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-success">APPROVE APPLICANT</button>
                                         <button type="button" data-toggle="modal" data-target="#disapprove" class="btn btn-danger">DISAPPROVE APPLICANT</button>
                                     @else
-                                       <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-warning">YOU HAVE ALREADY APPROVED APPLICANT </button>
+                                       <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-warning"> APPLICANT ALREADY APPROVED </button>
                                        
                                     @endif
                                        
@@ -399,7 +437,8 @@
               </button>
             </div>
             <div class="modal-body">
-                    <form>
+                    <form id="disapproveForm">
+                        {{csrf_field()}}
                     <input type="number" style="display: none;" class="form-control" value="{{$applicant->id}}" id="appid" placeholder="Enter Amount">   
                             <div class="form-group">
                                     <label for="exampleInputEmail1">Message</label>
@@ -472,6 +511,57 @@
         
      })
 
+
+     $("#disapproveForm").submit(function(event){
+        event.preventDefault();
+        swal({
+            title: "Disapproving Applicant",
+            text: "Are you sure you want to disapprove this application?",
+            icon: "info",
+            showCancelButton: true,
+            buttons: {
+                cancel: {
+                    text: "No Cancel",
+                    value: null,
+                    visible: true,
+                    className: "btn-danger",
+                    closeModal: false,
+                },
+                confirm: {
+                    text: "Yes, Approve",
+                    value: true,
+                    visible: true,
+                    className: "btn-success",
+                    closeModal: false
+                }
+            }
+        }).then(isConfirm => {
+            if (isConfirm) {
+                var data = $(this).serialize();
+                $.ajax({
+                   url: "{{url('/disapprove-applicant')}}",
+                   method: 'POST',
+                   data: {data, _token:"{{Session::token()}}"},
+                   success: function(response){
+                       console.log(response);
+                          if(response.status =='success'){
+                            swal("Success", response.message, "success");
+                          }else{
+                            swal("Error", response.message, "error");
+                          }
+                   },
+                   error: function(error){
+                        alert('Oops Something went wrong. Please try again');
+                        console.log(error)
+                   }
+               })
+            }else {
+                swal("Error", "Action cancelled. ", "error");
+            }
+        });
+        
+        
+     })
 
      
 </script>
